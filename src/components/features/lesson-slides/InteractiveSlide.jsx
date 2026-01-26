@@ -4,6 +4,7 @@ import { TermSorter } from "./interactives/TermSorter";
 import { ChatSimulation } from "./interactives/ChatSimulation";
 import { WifiSimulator } from "./interactives/WifiSimulator";
 import { CryptoScanner } from "./interactives/CryptoScanner";
+import { TotpSimulator } from "./interactives/TotpSimulator";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -11,6 +12,7 @@ const VARIANTS = {
 	"chat-simulation": ChatSimulation,
 	"wifi-simulator": WifiSimulator,
 	"crypto-scanner": CryptoScanner,
+	"totp-simulator": TotpSimulator,
 };
 
 export const InteractiveSlide = ({ slide, onNext }) => {

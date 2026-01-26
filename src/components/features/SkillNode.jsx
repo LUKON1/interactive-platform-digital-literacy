@@ -47,10 +47,11 @@ export const SkillNode = ({ topic, status, onClick, position, progress }) => {
 				) : (
 					<IconComponent size={40} className={iconColor} />
 				)}
+			</motion.button>
 
-				{/* Floating Label */}
-				<div
-					className={`
+			{/* Static Label (No scaling) */}
+			<div
+				className={`
             absolute -bottom-10 whitespace-nowrap font-bold text-sm px-3 py-1 rounded-full border 
             ${
 							isActive
@@ -60,10 +61,8 @@ export const SkillNode = ({ topic, status, onClick, position, progress }) => {
 									: "bg-[var(--color-bg-surface-2)] border-[var(--color-success)] text-[var(--color-success)]"
 						}
         `}>
-					{topic.title}
-					{/* Actually, let's just use the props correctly. I need to update the component signature first or just use props.progress if available. */}
-				</div>
-			</motion.button>
+				{topic.title}
+			</div>
 		</div>
 	);
 };

@@ -28,6 +28,27 @@ export const PasswordBuilder = ({ onComplete }) => {
 	const strength = calculateStrength(password);
 	const isComplete = strength === 100;
 
+	// Simple crack time estimation (Mock for educational purposes)
+	const getCrackTime = (score) => {
+		if (score < 40) return "Мгновенно ⚠️";
+		if (score < 60) return "5 минут 🕒";
+		if (score < 80) return "3 дня 🗓️";
+		if (score < 90) return "400 лет 🐢";
+		return "5 миллионов лет 🛡️";
+	};
+
+	const [checkResult, setCheckResult] = useState(null); // null | { time: string }
+
+	const handleCheck = () => {
+		const time = getCrackTime(strength);
+		setCheckResult({ time });
+	};
+
+	// If 'onComplete' is called, it means user is done reading the result
+	const handleNext = () => {
+		onComplete();
+	};
+
 	let StrengthIcon = Shield;
 	let color = "text-[var(--color-text-muted)]";
 	if (strength > 30) {
@@ -59,14 +80,17 @@ export const PasswordBuilder = ({ onComplete }) => {
 				<input
 					type="text"
 					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					onChange={(e) => {
+						setPassword(e.target.value);
+						setCheckResult(null); // Reset result on typo
+					}}
 					placeholder="Введите пароль..."
 					className="w-full bg-[var(--color-bg-base)] border border-[var(--color-bg-surface-3)] rounded-xl px-4 py-3 text-xl text-center text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-primary)] transition-all"
 				/>
 
 				<div className="mt-4 text-sm text-[var(--color-text-secondary)] text-left space-y-2">
 					{password.length > 20 || /([a-zA-Z]+[^a-zA-Z]+){3,}/.test(password) ? (
-						<p className="text-[var(--color-success)] font-bold">✨ Похоже на мощную мнемофразу!</p>
+						<p className="text-[var(--color-success)] font-bold">Отличная мнемофраза</p>
 					) : (
 						<p className={password.length >= 12 ? "text-[var(--color-success)]" : ""}>
 							• Длина 12+ символов (или 4+ слова)
@@ -80,14 +104,34 @@ export const PasswordBuilder = ({ onComplete }) => {
 						• Спецсимвол (!@#$%)
 					</p>
 				</div>
+
+				{checkResult && (
+					<motion.div
+						initial={{ opacity: 0, height: 0 }}
+						animate={{ opacity: 1, height: "auto" }}
+						className="mt-6 p-4 bg-[var(--color-bg-surface-2)] rounded-xl border border-[var(--color-primary)]/20">
+						<div className="text-sm text-[var(--color-text-secondary)] mb-1">
+							Время на взлом (Брутфорс):
+						</div>
+						<div className="text-2xl font-bold text-[var(--color-primary)]">{checkResult.time}</div>
+					</motion.div>
+				)}
 			</div>
 
-			<button
-				onClick={onComplete}
-				disabled={!isComplete}
-				className={`btn-primary w-full py-4 text-lg font-bold transition-all ${!isComplete ? "opacity-50 cursor-not-allowed grayscale" : "animate-pulse"}`}>
-				Проверить защиту
-			</button>
+			{!checkResult ? (
+				<button
+					onClick={handleCheck}
+					disabled={!isComplete}
+					className={`btn-primary w-full py-4 text-lg font-bold transition-all ${!isComplete ? "opacity-50 cursor-not-allowed grayscale" : "animate-pulse"}`}>
+					Проверить защиту
+				</button>
+			) : (
+				<button
+					onClick={handleNext}
+					className="btn-primary w-full py-4 text-lg font-bold bg-[var(--color-success)] hover:bg-[var(--color-success)]/90 border-transparent text-white">
+					Отлично! Продолжить
+				</button>
+			)}
 		</div>
 	);
 };

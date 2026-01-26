@@ -25,18 +25,20 @@ export const LESSONS = {
 				{
 					id: "slide-3",
 					type: "theory",
-					title: "Два пути самурая",
+					title: "Типы надежных паролей",
 					content: `Есть два способа создать надежную защиту. Оба **одинаково безопасны**, но один из них удобнее.
 
-1.  **Классический (Сложный):**
-    Набор символов: \`X7#m_9$pL2\`.
-    *   ✅ Компьютер не взломает.
-    *   ❌ Человеку невозможно запомнить. Идеально для менеджеров паролей.
+1.  **Классический (Сложный)**
+    Набор символов: **X7#m_9$pL2**
 
-2.  **Мнемофраза (Удобный):**
-    Набор слов: \`correct-horse-battery-staple\`.
-    *   ✅ Длина > 20 символов делает взлом невозможным.
-    *   ✅ **Легко запомнить.** Наш мозг любит образы.
+    *   Компьютер не взломает
+    *   Человеку невозможно запомнить. Идеально для менеджеров паролей
+
+2.  **Мнемофраза (Удобный)**
+    Набор слов: **correct-horse-battery-staple**
+
+    *   Длина > 20 символов делает взлом невозможным
+    *   **Легко запомнить.** Наш мозг любит образы
 
 Выбирай мнемофразы для тех паролей, которые нужно вводить руками (вход в систему, мастер-пароль).`,
 				},
@@ -45,7 +47,7 @@ export const LESSONS = {
 					type: "interactive",
 					variant: "term-sorter",
 					title: "Уровень 1: Отсеиваем мусор",
-					description: "Убери откровенно слабые пароли.",
+					description: "Отдели откровенно слабые пароли от нормальных.",
 					// Default labels: Слабый / Сильный
 					data: [
 						{ id: "1", content: "password123", category: "unsafe" },
@@ -53,6 +55,8 @@ export const LESSONS = {
 						{ id: "3", content: "K#9mP$2v", category: "safe" },
 						{ id: "4", content: "iloveyou", category: "unsafe" },
 						{ id: "5", content: "L8*q_Z1!", category: "safe" },
+						{ id: "6", content: "correct-horse-battery-staple", category: "safe" },
+						{ id: "7", content: "dog-cat", category: "unsafe" },
 					],
 				},
 				{
@@ -64,20 +68,20 @@ export const LESSONS = {
 						"Оба типа защиты надежны. Но что легче запомнить, а что лучше доверить менеджеру паролей?",
 					labels: { unsafe: "Хардкор (Символы)", safe: "Мнемофраза (Слова)" },
 					data: [
-						{ id: "1", content: "X7#m_9$pL2", category: "unsafe" }, // Using 'unsafe' bucket for 'Hardcore' visually (Red/Warning color fits 'Hard')
+						{ id: "1", content: "X7#m_9$pL2", category: "unsafe" }, // Using 'unsafe' bucket for 'Hardcore' visually
 						{ id: "2", content: "coffee-jump-sky-blue", category: "safe" },
 						{ id: "3", content: "9#vB!mk2", category: "unsafe" },
 						{ id: "4", content: "purple-elephant-running", category: "safe" },
-						{ id: "5", content: "Tr0ub4dor&3", category: "unsafe" },
+						{ id: "5", content: "R2^k@9L!", category: "unsafe" },
 					],
 				},
 				{
 					id: "slide-5",
 					type: "interactive",
 					variant: "password-builder",
-					title: "Создай свою Мнемофразу",
+					title: "Лаборатория Паролей",
 					description:
-						"Попробуй ввести 4 случайных слова через пробел или тире. Например: 'lazy-dog-sleeping-sun'.",
+						"Создайте свою Мнемофразу или стойкий обычный пароль. Проверьте, сколько времени уйдет на его взлом.",
 				},
 				{
 					id: "slide-6",
@@ -94,7 +98,51 @@ export const LESSONS = {
 			description: "Зачем нужен второй ключ от твоего цифрового дома.",
 			duration: "7 мин",
 			slides: [
-				// ... placeholders
+				{
+					id: "2fa-1",
+					type: "intro",
+					title: "Второй замок",
+					content:
+						"Пароль — это первый замок на двери. Но если его украдут? 2FA — это второй замок, ключ от которого только у тебя (в телефоне).",
+				},
+				{
+					id: "2fa-theory-1",
+					type: "theory",
+					title: "Типы 2FA",
+					content: `Не все вторые ключи одинаково надежны.
+
+1.  **SMS-коды (База)**
+    Самый популярный, но уязвимый способ. Хакеры могут перехватить SMS или сделать дубликат сим-карты.
+
+2.  **Приложения (ТОП)**
+    Google Authenticator, Authy. Генерируют коды прямо на устройстве, даже без интернета. Намного безопаснее.
+
+3.  **Аппаратный ключ (PRO)**
+    USB-флешка (YubiKey). Невозможно взломать удаленно.`,
+				},
+				{
+					id: "2fa-fact",
+					type: "fact",
+					title: "Статистика Google",
+					content:
+						"Включение даже простой SMS-аутентификации блокирует **96%** автоматических атак. А использование приложения (Authenticator) — почти **100%** фишинга.",
+					icon: "ShieldCheck",
+				},
+				{
+					id: "2fa-interactive-totp",
+					type: "interactive",
+					variant: "totp-simulator",
+					title: "Гонка со временем",
+					description:
+						"Код в приложении живет всего 30 секунд. Успейте ввести его, пока он не обновился!",
+				},
+				{
+					id: "2fa-outtro",
+					type: "outtro",
+					title: "Урок пройден",
+					content:
+						"Главное правило 2FA: **Никому** не сообщай коды подтверждения. Даже друзьям, даже сотрудникам банка.",
+				},
 			],
 		},
 	],

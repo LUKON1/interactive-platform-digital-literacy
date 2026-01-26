@@ -30,20 +30,35 @@ const ChatMessage = ({ msg }) => {
 	);
 };
 
-export const ChatSimulation = ({ onComplete }) => {
-	const [messages, setMessages] = useState([
-		{
-			id: 1,
-			sender: "Support",
-			text: "Здравствуйте! Замечена подозрительная активность на вашем аккаунте Steam.",
+export const ChatSimulation = ({ onComplete, data }) => {
+	// Default Scenario (Steam Phishing)
+	const defaultScenario = {
+		messages: [
+			{
+				id: 1,
+				sender: "Support",
+				text: "Здравствуйте! Замечена подозрительная активность на вашем аккаунте Steam.",
+			},
+			{
+				id: 2,
+				sender: "Support",
+				text: "Срочно перейдите по ссылке steam-community-secure.com/login чтобы подтвердить, что это вы, иначе аккаунт будет заблокирован через 24 часа.",
+			},
+		],
+		options: [
+			{ text: "Ок, перехожу, спасибо!", isCorrect: false },
+			{ text: "Это фишинг. Домен левый. В бан.", isCorrect: true },
+		],
+		header: {
+			title: "Steam Support?",
+			subtitle: "online",
+			iconColor: "from-purple-500 to-pink-500", // gradient classes
 		},
-		{
-			id: 2,
-			sender: "Support",
-			text: "Срочно перейдите по ссылке steam-community-secure.com/login чтобы подтвердить, что это вы, иначе аккаунт будет заблокирован через 24 часа.",
-		},
-	]);
+	};
 
+	const config = data || defaultScenario;
+
+	const [messages, setMessages] = useState(config.messages);
 	const [isTyping, setIsTyping] = useState(false);
 	const [finished, setFinished] = useState(false);
 	const [outcome, setOutcome] = useState(null); // 'safe' | 'hacked'
@@ -92,10 +107,7 @@ export const ChatSimulation = ({ onComplete }) => {
 		}, 1500);
 	};
 
-	const options = [
-		{ text: "Ок, перехожу, спасибо!", isCorrect: false },
-		{ text: "Это фишинг. Домен левый. В бан.", isCorrect: true },
-	];
+	const options = config.options;
 
 	return (
 		<div className="w-full max-w-md mx-auto">
@@ -103,10 +115,14 @@ export const ChatSimulation = ({ onComplete }) => {
 				{/* Fake Header */}
 				<div className="h-14 bg-[var(--color-bg-surface-2)] border-b border-[var(--color-bg-surface-3)] flex items-center px-4 justify-between">
 					<div className="flex items-center gap-3">
-						<div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+						<div
+							className={`w-8 h-8 rounded-full bg-gradient-to-br ${config.header?.iconColor || "from-gray-500 to-gray-700"}`}
+						/>
 						<div className="flex flex-col">
-							<span className="text-sm font-bold">Steam Support?</span>
-							<span className="text-xs text-[var(--color-text-secondary)]">online</span>
+							<span className="text-sm font-bold">{config.header?.title || "Support"}</span>
+							<span className="text-xs text-[var(--color-text-secondary)]">
+								{config.header?.subtitle || "online"}
+							</span>
 						</div>
 					</div>
 					<ShieldAlert size={18} className="text-[var(--color-error)]" />

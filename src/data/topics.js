@@ -1,7 +1,7 @@
 export const TOPICS = [
 	{
 		id: "cyber-hygiene",
-		title: "Кибер-Гигиена",
+		title: "Цифровая Крепость",
 		description: "Создание паролей и базовая защита.",
 		icon: "ShieldCheck",
 		theme: "primary",

@@ -66,7 +66,7 @@ export const TopicPage = () => {
 								<div className="flex items-center gap-6">
 									<div
 										className={`
-                    w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold
+                    w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shrink-0
                     ${
 											isCompleted
 												? "bg-[var(--color-success)] text-[var(--color-bg-base)]"

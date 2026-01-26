@@ -38,8 +38,24 @@ export const LessonPage = () => {
 	if (!lesson) return null;
 
 	const slides = lesson.slides || [];
+
+	if (slides.length === 0) {
+		return (
+			<LessonLayout title={lesson.title} progress={0} onClose={() => navigate(`/topic/${topicId}`)}>
+				<div className="h-full flex items-center justify-center flex-col text-center p-8">
+					<h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-4">
+						Урок в разработке 🛠
+					</h2>
+					<p className="text-[var(--color-text-secondary)]">
+						Мы уже пишем контент. Загляните позже!
+					</p>
+				</div>
+			</LessonLayout>
+		);
+	}
+
 	const currentSlide = slides[currentSlideIndex];
-	const Progress = (currentSlideIndex / (slides.length - 1)) * 100;
+	const Progress = ((currentSlideIndex + 1) / slides.length) * 100; // Fix progress calc (1-based / total)
 
 	const handleNext = () => {
 		if (currentSlideIndex < slides.length - 1) {

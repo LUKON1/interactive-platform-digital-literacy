@@ -61,8 +61,10 @@ export const TheorySlide = ({ slide, onNext }) => {
 				</ReactMarkdown>
 			</motion.div>
 
-			<div className="mt-auto flex justify-end pt-8">
-				<button onClick={onNext} className="btn-primary flex items-center">
+			<div className="mt-auto w-full flex justify-center pt-8">
+				<button
+					onClick={onNext}
+					className="btn-primary flex items-center text-lg px-12 py-4 shadow-lg shadow-primary/20">
 					Далее <ArrowRight size={20} className="ml-2" />
 				</button>
 			</div>

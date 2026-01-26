@@ -1,3 +1,7 @@
+import React from "react";
+import { motion } from "motion/react";
+import { CheckCircle, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
@@ -52,7 +56,7 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 				whileHover={{ scale: 1.05 }}
 				whileTap={{ scale: 0.95 }}
 				onClick={() => navigate(`/topic/${topicId}`)}
-				className="btn-primary flex items-center px-8 py-3 bg-[var(--color-bg-surface-2)] !text-[var(--color-text-primary)] !bg-transparent border border-[var(--color-bg-surface-3)] hover:!bg-[var(--color-bg-surface-2)]">
+				className="btn-primary flex items-center text-lg px-12 py-4 mt-12 bg-[var(--color-bg-surface-2)] !text-[var(--color-text-primary)] !bg-transparent border border-[var(--color-bg-surface-3)] hover:!bg-[var(--color-bg-surface-2)]">
 				<Home size={20} className="mr-2" /> Вернуться назад
 			</motion.button>
 		</div>
