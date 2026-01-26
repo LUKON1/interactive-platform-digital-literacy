@@ -1,0 +1,80 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "motion/react";
+import { LessonLayout } from "../components/layout/LessonLayout";
+import { LESSONS } from "../data/lessons";
+import { useProgressStore } from "../store/useProgressStore";
+import { IntroSlide } from "../components/features/lesson-slides/IntroSlide";
+import { TheorySlide } from "../components/features/lesson-slides/TheorySlide";
+import { FactSlide } from "../components/features/lesson-slides/FactSlide";
+import { InteractiveSlide } from "../components/features/lesson-slides/InteractiveSlide";
+import { OuttroSlide } from "../components/features/lesson-slides/OuttroSlide";
+
+const SLIDE_COMPONENTS = {
+	intro: IntroSlide,
+	theory: TheorySlide,
+	fact: FactSlide,
+	interactive: InteractiveSlide,
+	outtro: OuttroSlide,
+};
+
+export const LessonPage = () => {
+	const { id: topicId, lessonId } = useParams();
+	const navigate = useNavigate();
+	const { completeLesson } = useProgressStore();
+
+	const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+	// Find Lesson Data
+	const topicLessons = LESSONS[topicId];
+	const lesson = topicLessons?.find((l) => l.id === lessonId);
+
+	useEffect(() => {
+		if (!lesson) {
+			navigate(`/topic/${topicId}`); // Redirect if invalid
+		}
+	}, [lesson, topicId, navigate]);
+
+	if (!lesson) return null;
+
+	const slides = lesson.slides || [];
+	const currentSlide = slides[currentSlideIndex];
+	const Progress = (currentSlideIndex / (slides.length - 1)) * 100;
+
+	const handleNext = () => {
+		if (currentSlideIndex < slides.length - 1) {
+			setCurrentSlideIndex((prev) => prev + 1);
+		}
+	};
+
+	const handleComplete = () => {
+		completeLesson(topicId, lessonId);
+	};
+
+	const SlideComponent = SLIDE_COMPONENTS[currentSlide.type] || TheorySlide;
+
+	return (
+		<LessonLayout
+			title={lesson.title}
+			progress={Progress}
+			onClose={() => navigate(`/topic/${topicId}`)}>
+			<AnimatePresence mode="wait">
+				<motion.div
+					key={currentSlideIndex}
+					initial={{ opacity: 0, x: 20 }}
+					animate={{ opacity: 1, x: 0 }}
+					exit={{ opacity: 0, x: -20 }}
+					transition={{ duration: 0.3 }}
+					className="h-full">
+					<SlideComponent
+						slide={currentSlide}
+						onNext={handleNext}
+						lessonId={lessonId}
+						topicId={topicId}
+						onComplete={handleComplete}
+					/>
+				</motion.div>
+			</AnimatePresence>
+		</LessonLayout>
+	);
+};

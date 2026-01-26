@@ -1,68 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+	/* Material You / Pixel UI Color Palette */
+
+	/* Core Surfaces (Dark Violet Theme) */
+	--color-bg-base: #0b0912;
+	--color-bg-surface-1: #181524;
+	--color-bg-surface-2: #272338;
+	--color-bg-surface-3: #393450;
+
+	/* Text Colors */
+	--color-text-primary: #f3f0ff;
+	--color-text-secondary: #c4badd;
+	--color-text-muted: #7a7396;
+
+	/* Brand Accents (Pastel Violets - Material You) */
+	--color-primary: #d0bcff;
+	--color-on-primary: #381e72;
+	--color-secondary: #ccc2dc;
+	--color-on-secondary: #332d41;
+	--color-tertiary: #efb8c8;
+	--color-on-tertiary: #492532;
+
+	/* Status Colors */
+	--color-success: #b3eebb; /* Soft Emerald */
+	--color-error: #f2b8b5; /* Soft Red */
+	--color-warning: #f9d8a6; /* Soft Amber */
+
+	/* Fonts */
+	--font-display: "Outfit", sans-serif;
+	--font-body: "Outfit", sans-serif;
+
+	/* Border Radius */
+	--radius-xl: 1.5rem; /* 24px - Standard Card */
+	--radius-2xl: 2rem; /* 32px - Large Card */
+	--radius-full: 9999px; /* Buttons */
+}
+
+/* Base Reset & Typography */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: var(--font-body);
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	color: var(--color-text-primary);
+	background-color: var(--color-bg-base);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	display: flex;
+	min-width: 320px;
+	min-height: 100vh;
+	background: var(--color-bg-base);
+	overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+	width: 100%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Utilities for Material You feel */
+.surface-card {
+	background-color: var(--color-bg-surface-1);
+	border-radius: var(--radius-2xl);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.surface-card-hover:hover {
+	background-color: var(--color-bg-surface-2);
+	transform: scale(1.01);
+}
+
+.btn-primary {
+	background-color: var(--color-primary);
+	color: var(--color-on-primary);
+	border-radius: var(--radius-full);
+	font-weight: 600;
+	padding: 0.75rem 1.5rem; /* Increased padding */
+	min-height: 48px; /* Touch target size */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+	opacity: 0.9;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-bg-surface-3);
+	border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-text-muted);
 }
