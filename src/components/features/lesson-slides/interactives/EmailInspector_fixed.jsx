@@ -42,24 +42,24 @@ export const EmailInspector = ({ onComplete, data }) => {
 		// This prevents "немедленно" from being highlighted as urgency
 		if (redFlags.find((f) => f.id === "grammar")) {
 			highlightedBody = highlightedBody.replace(
-/(перейдите по ссылке немедленно)/gi,
-'<mark class="grammar-highlight" data-flag="grammar">$1</mark>',
-);
+				/(перейдите по ссылке немедленно)/gi,
+				'<mark class="grammar-highlight" data-flag="grammar">$1</mark>',
+			);
 		}
 
 		// Then process other patterns
 		flagsToHighlight.forEach((flag) => {
 			if (flag.id === "urgency") {
 				highlightedBody = highlightedBody.replace(
-/(24 часа|24 часов|срочно)/gi,
-'<mark class="urgency-highlight" data-flag="urgency">$1</mark>',
-);
+					/(24 часа|24 часов|срочно)/gi,
+					'<mark class="urgency-highlight" data-flag="urgency">$1</mark>',
+				);
 			}
 			if (flag.id === "link") {
 				highlightedBody = highlightedBody.replace(
-/(https?:\/\/[^\s]+)/g,
-'<mark class="link-highlight" data-flag="link">$1</mark>',
-);
+					/(https?:\/\/[^\s]+)/g,
+					'<mark class="link-highlight" data-flag="link">$1</mark>',
+				);
 			}
 		});
 
@@ -83,12 +83,14 @@ export const EmailInspector = ({ onComplete, data }) => {
 	};
 
 	return (
-<div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6">
+		<div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-4 sm:gap-6">
 			{/* Email Display */}
 			<div className="flex-1 surface-card p-4 sm:p-6 overflow-hidden">
 				<div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-bg-surface-3">
 					<Mail className="text-primary" size={20} />
-					<h3 className="text-base sm:text-lg md:text-xl font-bold text-text-primary">Входящее письмо</h3>
+					<h3 className="text-base sm:text-lg md:text-xl font-bold text-text-primary">
+						Входящее письмо
+					</h3>
 				</div>
 
 				{/* Email Header */}
@@ -96,12 +98,12 @@ export const EmailInspector = ({ onComplete, data }) => {
 					{/* From */}
 					<div
 						className={`p-2 sm:p-3 rounded-lg border-2 transition-all cursor-pointer ${
-hoveredFlag === "sender"
-? "border-error bg-error/10"
-: foundFlags.includes("sender")
-? "border-success bg-success/10"
-: "border-bg-surface-3 bg-bg-surface-2"
-}`}
+							hoveredFlag === "sender"
+								? "border-error bg-error/10"
+								: foundFlags.includes("sender")
+									? "border-success bg-success/10"
+									: "border-bg-surface-3 bg-bg-surface-2"
+						}`}
 						onClick={() => handleFlagClick("sender")}
 						onMouseEnter={() =>
 							setHoveredFlag(redFlags.find((f) => f.id === "sender") ? "sender" : null)
@@ -173,25 +175,27 @@ hoveredFlag === "sender"
 						{redFlags.map((flag) => {
 							const isFound = foundFlags.includes(flag.id);
 							return (
-<motion.div
+								<motion.div
 									key={flag.id}
 									initial={{ opacity: 0.5 }}
 									animate={{ opacity: isFound ? 1 : 0.5 }}
 									className={`p-2 sm:p-3 rounded-lg border-2 cursor-pointer transition-all ${
-isFound
-? "border-success bg-success/10 text-success"
-: "border-bg-surface-3 bg-bg-surface-2 text-text-muted"
-}`}
+										isFound
+											? "border-success bg-success/10 text-success"
+											: "border-bg-surface-3 bg-bg-surface-2 text-text-muted"
+									}`}
 									onClick={() => isFound && setSelectedFlag(flag)}>
 									<div className="flex items-start gap-2">
 										{isFound ? (
-<CheckCircle size={14} className="shrink-0 mt-0.5 sm:w-4 sm:h-4" />
+											<CheckCircle size={14} className="shrink-0 mt-0.5 sm:w-4 sm:h-4" />
 										) : (
-<div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border-2 border-current shrink-0 mt-0.5" />
+											<div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full border-2 border-current shrink-0 mt-0.5" />
 										)}
 										<div className="flex-1 min-w-0">
 											<div className="font-semibold text-xs sm:text-sm">{flag.title}</div>
-											{isFound && <div className="text-xs mt-0.5 opacity-80">Нажми для деталей</div>}
+											{isFound && (
+												<div className="text-xs mt-0.5 opacity-80">Нажми для деталей</div>
+											)}
 										</div>
 									</div>
 								</motion.div>
@@ -230,11 +234,14 @@ isFound
 							onClick={(e) => e.stopPropagation()}>
 							<div className="flex items-start justify-between mb-3 sm:mb-4">
 								<div className="flex items-center gap-2 sm:gap-3">
-									<div className={`p-1.5 sm:p-2 rounded-lg ${getSeverityColor(selectedFlag.severity)}`}>
+									<div
+										className={`p-1.5 sm:p-2 rounded-lg ${getSeverityColor(selectedFlag.severity)}`}>
 										<AlertTriangle size={20} className="sm:w-6 sm:h-6" />
 									</div>
 									<div>
-										<h3 className="text-lg sm:text-xl font-bold text-text-primary">{selectedFlag.title}</h3>
+										<h3 className="text-lg sm:text-xl font-bold text-text-primary">
+											{selectedFlag.title}
+										</h3>
 										<p className="text-xs text-text-muted uppercase tracking-wide">
 											{selectedFlag.severity === "critical"
 												? "Критическая угроза"
@@ -251,9 +258,13 @@ isFound
 								</button>
 							</div>
 
-							<p className="text-sm sm:text-base text-text-primary leading-relaxed">{selectedFlag.description}</p>
+							<p className="text-sm sm:text-base text-text-primary leading-relaxed">
+								{selectedFlag.description}
+							</p>
 
-							<button onClick={() => setSelectedFlag(null)} className="btn-primary w-full mt-4 sm:mt-6 text-sm sm:text-base">
+							<button
+								onClick={() => setSelectedFlag(null)}
+								className="btn-primary w-full mt-4 sm:mt-6 text-sm sm:text-base">
 								Понятно
 							</button>
 						</motion.div>

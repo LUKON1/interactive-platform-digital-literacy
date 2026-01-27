@@ -54,7 +54,9 @@ export const SkillTreePage = () => {
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				className="pt-12 pb-8 text-center px-6">
-				{/* XP Badge Removed as requested */}
+				<div className="inline-block px-4 py-1.5 rounded-full bg-bg-surface-2 text-primary text-sm font-medium mb-4 border border-bg-surface-3">
+					Digital Literacy Platform v1.0
+				</div>
 				<h1 className="text-5xl md:text-7xl font-bold mb-4 bg-linear-to-r from-white via-primary to-secondary bg-clip-text text-transparent">
 					Постепенное обучение
 				</h1>
