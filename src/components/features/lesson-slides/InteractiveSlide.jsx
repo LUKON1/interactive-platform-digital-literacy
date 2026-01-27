@@ -6,6 +6,7 @@ import { WifiSimulator } from "./interactives/WifiSimulator";
 import { CryptoScanner } from "./interactives/CryptoScanner";
 import { TotpSimulator } from "./interactives/TotpSimulator";
 import { ImageQuiz } from "./interactives/ImageQuiz";
+import { EmailInspector } from "./interactives/EmailInspector";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -15,18 +16,28 @@ const VARIANTS = {
 	"crypto-scanner": CryptoScanner,
 	"totp-simulator": TotpSimulator,
 	"image-quiz": ImageQuiz,
+	"email-inspector": EmailInspector,
 };
 
-export const InteractiveSlide = ({ slide, onNext }) => {
+export const InteractiveSlide = ({ slide, onNext, onPrevious, canGoPrevious, isCompleted }) => {
 	const Component = VARIANTS[slide.variant];
 
 	return (
-		<div className="h-full flex flex-col items-center justify-center p-6 md:p-8 text-center max-w-4xl mx-auto">
-			<h2 className="text-3xl font-bold text-primary mb-4">{slide.title}</h2>
-			<p className="text-text-secondary mb-8 text-lg">{slide.description}</p>
+		<div className="min-h-full flex flex-col p-4 pb-6 sm:p-6 sm:pb-8 md:p-8 md:pb-10 text-center max-w-6xl mx-auto">
+			<h2 className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">{slide.title}</h2>
+			<p className="text-text-secondary mb-3 sm:mb-4 md:mb-6 text-sm sm:text-base md:text-lg">
+				{slide.description}
+			</p>
 
 			{Component ? (
-				<Component onComplete={onNext} data={slide.data} labels={slide.labels} />
+				<Component
+					onComplete={onNext}
+					onPrevious={onPrevious}
+					canGoPrevious={canGoPrevious}
+					isCompleted={isCompleted}
+					data={slide.data}
+					labels={slide.labels}
+				/>
 			) : (
 				<div className="p-8 border border-dashed border-error rounded-xl">
 					Unknown interactive variant: {slide.variant}

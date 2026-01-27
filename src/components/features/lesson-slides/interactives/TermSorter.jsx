@@ -19,12 +19,12 @@ const DraggableItem = ({ id, content, isOverlay = false }) => {
 			{...listeners}
 			{...attributes}
 			className={`
-        bg-[var(--color-bg-surface-2)] border border-[var(--color-bg-surface-3)] 
+        bg-bg-surface-2 border border-bg-surface-3 
         px-6 py-4 rounded-xl cursor-grab active:cursor-grabbing shadow-lg
-        text-[var(--color-text-primary)] font-medium text-lg
-        ${isOverlay ? "scale-105 border-[var(--color-primary)]" : ""}
+        text-text-primary font-medium text-lg
+        ${isOverlay ? "scale-105 border-primary" : ""}
         ${isDragging ? "opacity-30" : "opacity-100 h-20"} 
-        flex items-center justify-center transition-colors hover:border-[var(--color-primary)]/50
+        flex items-center justify-center transition-colors hover:border-primary/50
       `}
 			style={{
 				touchAction: "none",
@@ -42,18 +42,17 @@ const DroppableBucket = ({ id, title, icon: Icon, color, items = [] }) => {
 		<div
 			ref={setNodeRef}
 			className={`
-        flex-1 min-h-[300px] rounded-3xl border-2 transition-all p-4 flex flex-col items-center
+        flex-1 min-h-75 rounded-3xl border-2 transition-all p-4 flex flex-col items-center
         ${
 					isOver
-						? `bg-[var(--color-bg-surface-2)] border-[var(--color-${color})] scale-[1.02]`
-						: "bg-[var(--color-bg-surface-1)] border-[var(--color-bg-surface-3)]"
+						? `bg-bg-surface-2 border-${color} scale-[1.02]`
+						: "bg-bg-surface-1 border-bg-surface-3"
 				}
       `}>
-			<div
-				className={`mb-4 p-3 rounded-full bg-[var(--color-bg-surface-2)] text-[var(--color-${color})]`}>
+			<div className={`mb-4 p-3 rounded-full bg-bg-surface-2 text-${color}`}>
 				{Icon && <Icon size={32} />}
 			</div>
-			<h3 className={`text-xl font-bold mb-6 text-[var(--color-${color})]`}>{title}</h3>
+			<h3 className={`text-xl font-bold mb-6 text-${color}`}>{title}</h3>
 
 			<div className="w-full space-y-3">
 				{items.map((item) => (
@@ -61,14 +60,14 @@ const DroppableBucket = ({ id, title, icon: Icon, color, items = [] }) => {
 						key={item.id}
 						initial={{ scale: 0.8, opacity: 0 }}
 						animate={{ scale: 1, opacity: 1 }}
-						className={`p-3 rounded-lg border text-center text-[var(--color-text-secondary)] border-[var(--color-${color})]/30 bg-[var(--color-${color})]/5`}>
+						className={`p-3 rounded-lg border text-center text-text-secondary border-${color}/30 bg-${color}/5`}>
 						{item.content}
 					</motion.div>
 				))}
 			</div>
 
 			{items.length === 0 && !isOver && (
-				<div className="mt-10 text-[var(--color-text-muted)] text-sm border-2 border-dashed border-[var(--color-bg-surface-3)] p-6 rounded-xl w-full text-center">
+				<div className="mt-10 text-text-muted text-sm border-2 border-dashed border-bg-surface-3 p-6 rounded-xl w-full text-center">
 					Перетащи сюда
 				</div>
 			)}
@@ -165,17 +164,17 @@ export const TermSorter = ({ onComplete, data, labels }) => {
 				</div>
 
 				{/* Source Stack */}
-				<div className="min-h-[120px] flex items-center justify-center relative">
+				<div className="min-h-30 flex items-center justify-center relative">
 					<AnimatePresence>
 						{items.length > 0 ? (
 							<div className="relative w-full max-w-xs">
-								<p className="text-center text-[var(--color-text-secondary)] mb-4 uppercase tracking-widest text-sm font-bold">
+								<p className="text-center text-text-secondary mb-4 uppercase tracking-widest text-sm font-bold">
 									Осталось: {items.length}
 								</p>
 								<DraggableItem id={items[0].id} content={items[0].content} />
 								{/* Shadow items for stack effect */}
 								{items.length > 1 && (
-									<div className="absolute top-0 left-0 w-full h-full bg-[var(--color-bg-surface-2)] border border-[var(--color-bg-surface-3)] rounded-xl -z-10 scale-95 translate-y-2 opacity-50" />
+									<div className="absolute top-0 left-0 w-full h-full bg-bg-surface-2 border border-bg-surface-3 rounded-xl -z-10 scale-95 translate-y-2 opacity-50" />
 								)}
 							</div>
 						) : (
@@ -183,9 +182,7 @@ export const TermSorter = ({ onComplete, data, labels }) => {
 								initial={{ scale: 0 }}
 								animate={{ scale: 1 }}
 								className="flex flex-col items-center">
-								<h3 className="text-2xl font-bold text-[var(--color-success)] mb-6">
-									Отличная работа!
-								</h3>
+								<h3 className="text-2xl font-bold text-success mb-6">Отличная работа!</h3>
 								<button onClick={onComplete} className="btn-primary animate-pulse">
 									Завершить задание
 								</button>
@@ -200,7 +197,7 @@ export const TermSorter = ({ onComplete, data, labels }) => {
 								initial={{ opacity: 0, y: 10 }}
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0 }}
-								className="absolute -bottom-12 text-[var(--color-error)] font-bold">
+								className="absolute -bottom-12 text-error font-bold">
 								Неверно! Подумай хорошо.
 							</motion.div>
 						)}

@@ -47,16 +47,11 @@ export const TotpSimulator = ({ onComplete }) => {
 	if (isSuccess) {
 		return (
 			<div className="flex flex-col items-center justify-center p-8 h-full">
-				<motion.div
-					initial={{ scale: 0 }}
-					animate={{ scale: 1 }}
-					className="text-[var(--color-success)] mb-6">
+				<motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-success mb-6">
 					<CheckCircle size={80} />
 				</motion.div>
-				<h2 className="text-3xl font-bold text-[var(--color-text-primary)] mb-4">
-					Доступ разрешен!
-				</h2>
-				<p className="text-[var(--color-text-secondary)] text-center max-w-md mb-8">
+				<h2 className="text-3xl font-bold text-text-primary mb-4">Доступ разрешен!</h2>
+				<p className="text-text-secondary text-center max-w-md mb-8">
 					Вы успели ввести код. Такие коды живут всего 30 секунд, поэтому украсть их очень сложно.
 				</p>
 				<button onClick={onComplete} className="btn-primary px-8 py-3">
@@ -77,7 +72,7 @@ export const TotpSimulator = ({ onComplete }) => {
 				<div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-10" />
 
 				{/* Screen */}
-				<div className="h-[500px] bg-[var(--color-bg-surface-2)] rounded-[2.5rem] overflow-hidden flex flex-col relative text-white">
+				<div className="h-125 bg-bg-surface-2 rounded-[2.5rem] overflow-hidden flex flex-col relative text-white">
 					{/* App Header */}
 					<div className="bg-gray-900 p-6 pt-12 pb-4 flex items-center justify-between">
 						<span className="font-bold text-lg">Authenticator</span>
@@ -131,12 +126,12 @@ export const TotpSimulator = ({ onComplete }) => {
 
 			{/* Login Form */}
 			<div className="flex-1 max-w-sm">
-				<div className="surface-card p-8 border border-[var(--color-bg-surface-3)]">
-					<div className="w-16 h-16 bg-[var(--color-bg-surface-3)] rounded-full mx-auto mb-6 flex items-center justify-center">
-						<ShieldCheck size={32} className="text-[var(--color-primary)]" />
+				<div className="surface-card p-8 border border-bg-surface-3">
+					<div className="w-16 h-16 bg-bg-surface-3 rounded-full mx-auto mb-6 flex items-center justify-center">
+						<ShieldCheck size={32} className="text-primary" />
 					</div>
 					<h2 className="text-2xl font-bold text-center mb-2">Двухэтапная проверка</h2>
-					<p className="text-[var(--color-text-secondary)] text-center text-sm mb-6">
+					<p className="text-text-secondary text-center text-sm mb-6">
 						Введите 6-значный код из приложения Authenticator.
 					</p>
 
@@ -148,21 +143,21 @@ export const TotpSimulator = ({ onComplete }) => {
 							placeholder="000 000"
 							maxLength={6}
 							className={`
-                                w-full bg-[var(--color-bg-base)] border rounded-xl px-4 py-4 text-2xl font-mono text-center tracking-[0.5em] focus:outline-none transition-all
-                                ${error ? "border-[var(--color-error)] text-[var(--color-error)]" : "border-[var(--color-bg-surface-3)] focus:border-[var(--color-primary)]"}
+                                w-full bg-bg-base border rounded-xl px-4 py-4 text-2xl font-mono text-center tracking-[0.5em] focus:outline-none transition-all
+                                ${error ? "border-error text-error" : "border-bg-surface-3 focus:border-primary"}
                             `}
 						/>
 						{error && (
 							<motion.div
 								initial={{ opacity: 0, y: -10 }}
 								animate={{ opacity: 1, y: 0 }}
-								className="text-[var(--color-error)] text-xs mt-2 text-center absolute -bottom-6 w-full">
+								className="text-error text-xs mt-2 text-center absolute -bottom-6 w-full">
 								{error}
 							</motion.div>
 						)}
 					</div>
 				</div>
-				<p className="text-center text-[var(--color-text-muted)] text-sm mt-6 max-w-xs mx-auto">
+				<p className="text-center text-text-muted text-sm mt-6 max-w-xs mx-auto">
 					<Timer size={14} className="inline mr-1" />
 					Поторопитесь! Код обновится через {timeLeft} сек.
 				</p>

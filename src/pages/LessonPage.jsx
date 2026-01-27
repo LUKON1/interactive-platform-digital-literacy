@@ -24,6 +24,7 @@ export const LessonPage = () => {
 	const { completeLesson } = useProgressStore();
 
 	const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+	const [completedInteractives, setCompletedInteractives] = useState(new Set());
 
 	// Find Lesson Data
 	const topicLessons = LESSONS[topicId];
@@ -51,7 +52,7 @@ export const LessonPage = () => {
 	}
 
 	const currentSlide = slides[currentSlideIndex];
-	const Progress = ((currentSlideIndex + 1) / slides.length) * 100; // Fix progress calc (1-based / total)
+	const Progress = ((currentSlideIndex + 1) / slides.length) * 100;
 
 	const handleNext = () => {
 		if (currentSlideIndex < slides.length - 1) {
@@ -59,13 +60,26 @@ export const LessonPage = () => {
 		}
 	};
 
+	const handlePrevious = () => {
+		if (currentSlideIndex > 0) {
+			setCurrentSlideIndex((prev) => prev - 1);
+		}
+	};
+
 	const handleComplete = () => {
 		completeLesson(topicId, lessonId);
+	};
+
+	const handleInteractiveComplete = () => {
+		// Mark current interactive as completed
+		setCompletedInteractives((prev) => new Set([...prev, currentSlideIndex]));
+		handleNext();
 	};
 
 	if (!currentSlide) return null;
 
 	const SlideComponent = SLIDE_COMPONENTS[currentSlide.type] || TheorySlide;
+	const isInteractiveCompleted = completedInteractives.has(currentSlideIndex);
 
 	return (
 		<LessonLayout
@@ -82,7 +96,11 @@ export const LessonPage = () => {
 					className="h-full">
 					<SlideComponent
 						slide={currentSlide}
-						onNext={handleNext}
+						onNext={currentSlide.type === "interactive" ? handleInteractiveComplete : handleNext}
+						onPrevious={handlePrevious}
+						onClose={() => navigate(`/topic/${topicId}`)}
+						canGoPrevious={currentSlideIndex > 0}
+						isCompleted={isInteractiveCompleted}
 						lessonId={lessonId}
 						topicId={topicId}
 						onComplete={handleComplete}
