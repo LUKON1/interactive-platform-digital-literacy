@@ -7,7 +7,7 @@ import {
 	defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
 import { motion, AnimatePresence } from "motion/react";
-import { Check, X } from "lucide-react";
+import { Check, X, ArrowLeft, ArrowRight, Lock } from "lucide-react";
 
 /* --- Draggable Item --- */
 const DraggableItem = ({ id, content, isOverlay = false }) => {
@@ -76,24 +76,44 @@ const DroppableBucket = ({ id, title, icon: Icon, color, items = [] }) => {
 };
 
 /* --- Main Component --- */
-export const TermSorter = ({ onComplete, data, labels }) => {
-	// Config (would come from props typically)
-	const [items, setItems] = useState(
-		data || [
-			{ id: "1", content: "123456", category: "unsafe" },
-			{ id: "2", content: "P@sw0rd!", category: "unsafe" }, // common pattern
-			{ id: "3", content: "Tr0ub4dor&3", category: "safe" },
-			{ id: "4", content: "MyNameIsLukon", category: "unsafe" },
-			{ id: "5", content: "X7#m_9$pL2", category: "safe" },
-		],
-	);
+/* --- Main Component --- */
+export const TermSorter = ({
+	onComplete,
+	onPrevious,
+	canGoPrevious,
+	isCompleted,
+	onNext,
+	data,
+	labels,
+}) => {
+	// Default data backup
+	const defaultItems = [
+		{ id: "1", content: "123456", category: "unsafe" },
+		{ id: "2", content: "P@sw0rd!", category: "unsafe" },
+		{ id: "3", content: "Tr0ub4dor&3", category: "safe" },
+		{ id: "4", content: "MyNameIsLukon", category: "unsafe" },
+		{ id: "5", content: "X7#m_9$pL2", category: "safe" },
+	];
+
+	const initialItems = data || defaultItems;
+
+	// Initialize items state
+	// If completed, items stack is empty
+	const [items, setItems] = useState(isCompleted ? [] : initialItems);
 
 	const bucketTitleSafe = labels?.safe || "Сильный Пароль";
 	const bucketTitleUnsafe = labels?.unsafe || "Слабый Пароль";
 
-	const [buckets, setBuckets] = useState({
-		safe: [],
-		unsafe: [],
+	// Initialize buckets state
+	// If completed, buckets are full (simulated)
+	const [buckets, setBuckets] = useState(() => {
+		if (isCompleted) {
+			return {
+				safe: initialItems.filter((i) => i.category === "safe"),
+				unsafe: initialItems.filter((i) => i.category === "unsafe"),
+			};
+		}
+		return { safe: [], unsafe: [] };
 	});
 
 	const [activeId, setActiveId] = useState(null);
@@ -183,9 +203,6 @@ export const TermSorter = ({ onComplete, data, labels }) => {
 								animate={{ scale: 1 }}
 								className="flex flex-col items-center">
 								<h3 className="text-2xl font-bold text-success mb-6">Отличная работа!</h3>
-								<button onClick={onComplete} className="btn-primary animate-pulse">
-									Завершить задание
-								</button>
 							</motion.div>
 						)}
 					</AnimatePresence>
@@ -214,6 +231,44 @@ export const TermSorter = ({ onComplete, data, labels }) => {
 					) : null}
 				</DragOverlay>
 			</DndContext>
+
+			{/* Navigation Buttons */}
+			<div className="w-full flex justify-between items-center gap-4 mt-8">
+				{canGoPrevious ? (
+					<motion.button
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						onClick={onPrevious}
+						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
+						<ArrowLeft size={20} className="mr-2" />
+						Назад
+					</motion.button>
+				) : (
+					<div />
+				)}
+
+				<motion.button
+					whileHover={isCompleted || allSorted ? { scale: 1.05 } : {}}
+					whileTap={isCompleted || allSorted ? { scale: 0.95 } : {}}
+					onClick={isCompleted || allSorted ? onComplete : undefined}
+					disabled={!isCompleted && !allSorted}
+					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
+						isCompleted || allSorted
+							? "btn-primary shadow-lg shadow-primary/20"
+							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
+					}`}>
+					{isCompleted || allSorted ? (
+						<>
+							Далее <ArrowRight size={20} className="ml-2" />
+						</>
+					) : (
+						<>
+							<Lock size={16} className="mr-2" />
+							Завершите сортировку
+						</>
+					)}
+				</motion.button>
+			</div>
 		</div>
 	);
 };

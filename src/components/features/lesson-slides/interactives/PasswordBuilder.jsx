@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Shield, ShieldAlert, ShieldCheck } from "lucide-react";
+import { Shield, ShieldAlert, ShieldCheck, ArrowLeft, ArrowRight, Lock } from "lucide-react";
 
-export const PasswordBuilder = ({ onComplete }) => {
-	const [password, setPassword] = useState("");
+export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompleted, onNext }) => {
+	// Pre-fill if completed to show success state
+	const [password, setPassword] = useState(isCompleted ? "Correct-Horse-Battery-Staple!" : "");
 
 	// Calculate strength (Mock logic)
 	const calculateStrength = (pwd) => {
@@ -37,7 +38,9 @@ export const PasswordBuilder = ({ onComplete }) => {
 		return "5 миллионов лет 🛡️";
 	};
 
-	const [checkResult, setCheckResult] = useState(null); // null | { time: string }
+	const [checkResult, setCheckResult] = useState(
+		isCompleted ? { time: "5 миллионов лет 🛡️" } : null,
+	); // null | { time: string }
 
 	const handleCheck = () => {
 		const time = getCrackTime(strength);
@@ -112,20 +115,54 @@ export const PasswordBuilder = ({ onComplete }) => {
 				)}
 			</div>
 
-			{!checkResult ? (
+			{!checkResult && (
 				<button
 					onClick={handleCheck}
 					disabled={!isComplete}
-					className={`btn-primary w-full py-4 text-lg font-bold transition-all ${!isComplete ? "opacity-50 cursor-not-allowed grayscale" : "animate-pulse"}`}>
+					className={`btn-primary w-full py-4 text-lg font-bold transition-all ${
+						!isComplete ? "opacity-50 cursor-not-allowed grayscale" : "animate-pulse"
+					}`}>
 					Проверить защиту
 				</button>
-			) : (
-				<button
-					onClick={handleNext}
-					className="btn-primary w-full py-4 text-lg font-bold bg-success hover:bg-success/90 border-transparent text-white">
-					Отлично! Продолжить
-				</button>
 			)}
+
+			{/* Navigation Buttons */}
+			<div className="w-full flex justify-between items-center gap-4 mt-8">
+				{canGoPrevious ? (
+					<motion.button
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						onClick={onPrevious}
+						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
+						<ArrowLeft size={20} className="mr-2" />
+						Назад
+					</motion.button>
+				) : (
+					<div />
+				)}
+
+				<motion.button
+					whileHover={isComplete && checkResult ? { scale: 1.05 } : {}}
+					whileTap={isComplete && checkResult ? { scale: 0.95 } : {}}
+					onClick={isComplete && checkResult ? onComplete : undefined}
+					disabled={!isComplete || !checkResult}
+					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
+						isComplete && checkResult
+							? "btn-primary shadow-lg shadow-primary/20"
+							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
+					}`}>
+					{isComplete && checkResult ? (
+						<>
+							Далее <ArrowRight size={20} className="ml-2" />
+						</>
+					) : (
+						<>
+							<Lock size={16} className="mr-2" />
+							Проверьте пароль
+						</>
+					)}
+				</motion.button>
+			</div>
 		</div>
 	);
 };
