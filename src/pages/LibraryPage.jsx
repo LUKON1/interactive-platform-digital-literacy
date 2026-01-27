@@ -15,13 +15,13 @@ export const LibraryPage = () => {
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				className="mb-12 text-center">
-				<div className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-bg-surface-2)] text-[var(--color-primary)] text-sm font-medium mb-4 border border-[var(--color-bg-surface-3)]">
+				<div className="inline-block px-4 py-1.5 rounded-full bg-bg-surface-2 text-primary text-sm font-medium mb-4 border border-bg-surface-3">
 					Digital Literacy Platform v1.0
 				</div>
-				<h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white via-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text text-transparent">
+				<h1 className="text-5xl md:text-7xl font-bold mb-4 bg-linear-to-r from-white via-primary to-secondary bg-clip-text text-transparent">
 					Cyber Academy
 				</h1>
-				<p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+				<p className="text-lg text-text-secondary max-w-2xl mx-auto">
 					Стань экспертом цифровой безопасности. Проходи миссии, получай опыт и защити себя в сети.
 				</p>
 			</motion.header>
@@ -64,8 +64,8 @@ export const LibraryPage = () => {
 
 			{/* Decorative Blur Backgrounds */}
 			<div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[var(--color-on-primary)] rounded-full blur-[120px] opacity-20" />
-				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[var(--color-tertiary)] rounded-full blur-[120px] opacity-10" />
+				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-on-primary rounded-full blur-[120px] opacity-20" />
+				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary rounded-full blur-[120px] opacity-10" />
 			</div>
 		</div>
 	);

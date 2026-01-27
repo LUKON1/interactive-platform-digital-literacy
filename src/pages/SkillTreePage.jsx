@@ -48,24 +48,24 @@ export const SkillTreePage = () => {
 	};
 
 	return (
-		<div className="min-h-screen pb-20 bg-[var(--color-bg-base)] overflow-x-hidden">
+		<div className="min-h-screen pb-20 bg-bg-base overflow-x-hidden">
 			{/* Hero Section */}
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 				className="pt-12 pb-8 text-center px-6">
 				{/* XP Badge Removed as requested */}
-				<h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white via-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text text-transparent">
+				<h1 className="text-5xl md:text-7xl font-bold mb-4 bg-linear-to-r from-white via-primary to-secondary bg-clip-text text-transparent">
 					Постепенное обучение
 				</h1>
-				<p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+				<p className="text-lg text-text-secondary max-w-2xl mx-auto">
 					Выполни хотя бы одну миссию уровня, чтобы открыть следующий.
 				</p>
 			</motion.div>
 
 			{/* Tiered Tree Viz */}
 			<div className="max-w-4xl mx-auto px-6 py-8 relative">
-				<div className="absolute left-1/2 top-10 bottom-10 w-1 bg-[var(--color-bg-surface-3)] -translate-x-1/2 -z-10 rounded-full opacity-30" />
+				<div className="absolute left-1/2 top-10 bottom-10 w-1 bg-bg-surface-3 -translate-x-1/2 -z-10 rounded-full opacity-30" />
 
 				<motion.div
 					variants={containerVariants}
@@ -85,7 +85,7 @@ export const SkillTreePage = () => {
 						}
 
 						// Difficulty Color Logic
-						let badgeStyle = "text-[var(--color-text-muted)] border-[var(--color-bg-surface-3)]";
+						let badgeStyle = "text-text-muted border-bg-surface-3";
 						if (isTierUnlocked) {
 							if (tierKey === "easy")
 								badgeStyle = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
@@ -101,7 +101,7 @@ export const SkillTreePage = () => {
 								<div className="flex justify-center mb-6">
 									<span
 										className={`
-                                   uppercase tracking-widest text-xs font-bold px-3 py-1 rounded-full border bg-[var(--color-bg-base)]
+                                   uppercase tracking-widest text-xs font-bold px-3 py-1 rounded-full border bg-bg-base
                                    ${badgeStyle}
                                `}>
 										{tierKey} Level
@@ -136,13 +136,11 @@ export const SkillTreePage = () => {
 
 								{/* Connector Arrow */}
 								{index < tierOrder.length - 1 && (
-									<div className="flex justify-center mt-16 text-[var(--color-bg-surface-3)]">
+									<div className="flex justify-center mt-16 text-bg-surface-3">
 										<ChevronDown
 											size={32}
 											className={
-												isTierUnlocked
-													? "animate-bounce text-[var(--color-primary)] opacity-50"
-													: "opacity-20"
+												isTierUnlocked ? "animate-bounce text-primary opacity-50" : "opacity-20"
 											}
 										/>
 									</div>

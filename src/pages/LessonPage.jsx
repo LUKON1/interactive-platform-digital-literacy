@@ -43,12 +43,8 @@ export const LessonPage = () => {
 		return (
 			<LessonLayout title={lesson.title} progress={0} onClose={() => navigate(`/topic/${topicId}`)}>
 				<div className="h-full flex items-center justify-center flex-col text-center p-8">
-					<h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-4">
-						Урок в разработке 🛠
-					</h2>
-					<p className="text-[var(--color-text-secondary)]">
-						Мы уже пишем контент. Загляните позже!
-					</p>
+					<h2 className="text-2xl font-bold text-text-primary mb-4">Урок в разработке 🛠</h2>
+					<p className="text-text-secondary">Мы уже пишем контент. Загляните позже!</p>
 				</div>
 			</LessonLayout>
 		);
@@ -66,6 +62,8 @@ export const LessonPage = () => {
 	const handleComplete = () => {
 		completeLesson(topicId, lessonId);
 	};
+
+	if (!currentSlide) return null;
 
 	const SlideComponent = SLIDE_COMPONENTS[currentSlide.type] || TheorySlide;
 

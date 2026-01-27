@@ -19,21 +19,19 @@ export const TopicPage = () => {
 		<div className="min-h-screen p-6 md:p-12 max-w-5xl mx-auto">
 			<button
 				onClick={() => navigate("/")}
-				className="mb-8 flex items-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
+				className="mb-8 flex items-center text-text-secondary hover:text-text-primary transition-colors">
 				<ArrowLeft size={20} className="mr-2" /> Назад в Хаб
 			</button>
 
 			<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
 				<div className="flex items-center gap-4 mb-6">
-					<div className="p-4 rounded-3xl bg-[var(--color-bg-surface-2)] text-[var(--color-primary)] inline-block">
+					<div className="p-4 rounded-3xl bg-bg-surface-2 text-primary inline-block">
 						{/* Dynamic Icon render could be improved here, currently just text/placeholder if strictly needed */}
 						<span className="font-bold text-2xl">#</span>
 					</div>
 					<div>
-						<h1 className="text-4xl font-bold text-[var(--color-text-primary)]">
-							{themeTopic.title}
-						</h1>
-						<p className="text-[var(--color-text-secondary)] mt-1">{themeTopic.description}</p>
+						<h1 className="text-4xl font-bold text-text-primary">{themeTopic.title}</h1>
+						<p className="text-text-secondary mt-1">{themeTopic.description}</p>
 					</div>
 				</div>
 
@@ -59,8 +57,8 @@ export const TopicPage = () => {
                   p-6 rounded-[24px] border flex items-center justify-between group transition-all
                   ${
 										actuallyLocked
-											? "border-[var(--color-bg-surface-3)] bg-[var(--color-bg-surface-1)] opacity-60 cursor-not-allowed"
-											: "border-white/5 bg-[var(--color-bg-surface-2)] hover:bg-[var(--color-bg-surface-3)] cursor-pointer hover:scale-[1.01]"
+											? "border-bg-surface-3 bg-bg-surface-1 opacity-60 cursor-not-allowed"
+											: "border-white/5 bg-bg-surface-2 hover:bg-bg-surface-3 cursor-pointer hover:scale-[1.01]"
 									}
                 `}>
 								<div className="flex items-center gap-6">
@@ -69,19 +67,17 @@ export const TopicPage = () => {
                     w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold shrink-0
                     ${
 											isCompleted
-												? "bg-[var(--color-success)] text-[var(--color-bg-base)]"
+												? "bg-success text-bg-base"
 												: actuallyLocked
-													? "bg-[var(--color-bg-surface-3)] text-[var(--color-text-muted)]"
-													: "bg-[var(--color-primary)] text-[var(--color-on-primary)]"
+													? "bg-bg-surface-3 text-text-muted"
+													: "bg-primary text-on-primary"
 										}
                   `}>
 										{isCompleted ? <CheckCircle size={24} /> : index + 1}
 									</div>
 									<div>
-										<h3 className="text-xl font-semibold text-[var(--color-text-primary)]">
-											{lesson.title}
-										</h3>
-										<p className="text-[var(--color-text-secondary)] text-sm mt-1">
+										<h3 className="text-xl font-semibold text-text-primary">{lesson.title}</h3>
+										<p className="text-text-secondary text-sm mt-1">
 											{lesson.duration} • {lesson.description}
 										</p>
 									</div>
@@ -89,10 +85,10 @@ export const TopicPage = () => {
 
 								<div className="pr-4">
 									{actuallyLocked ? (
-										<Lock size={24} className="text-[var(--color-text-muted)]" />
+										<Lock size={24} className="text-text-muted" />
 									) : (
-										<div className="w-10 h-10 rounded-full bg-[var(--color-bg-surface-3)] flex items-center justify-center group-hover:bg-[var(--color-primary)] group-hover:text-[var(--color-on-primary)] transition-colors">
-											<Play size={20} className="ml-1" />
+										<div className="w-10 h-10 rounded-full bg-bg-surface-3 flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+											<Play size={20} />
 										</div>
 									)}
 								</div>

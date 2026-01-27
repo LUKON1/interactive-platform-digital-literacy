@@ -5,6 +5,7 @@ import { ChatSimulation } from "./interactives/ChatSimulation";
 import { WifiSimulator } from "./interactives/WifiSimulator";
 import { CryptoScanner } from "./interactives/CryptoScanner";
 import { TotpSimulator } from "./interactives/TotpSimulator";
+import { ImageQuiz } from "./interactives/ImageQuiz";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -13,6 +14,7 @@ const VARIANTS = {
 	"wifi-simulator": WifiSimulator,
 	"crypto-scanner": CryptoScanner,
 	"totp-simulator": TotpSimulator,
+	"image-quiz": ImageQuiz,
 };
 
 export const InteractiveSlide = ({ slide, onNext }) => {
@@ -20,13 +22,13 @@ export const InteractiveSlide = ({ slide, onNext }) => {
 
 	return (
 		<div className="h-full flex flex-col items-center justify-center p-6 md:p-8 text-center max-w-4xl mx-auto">
-			<h2 className="text-3xl font-bold text-[var(--color-primary)] mb-4">{slide.title}</h2>
-			<p className="text-[var(--color-text-secondary)] mb-8 text-lg">{slide.description}</p>
+			<h2 className="text-3xl font-bold text-primary mb-4">{slide.title}</h2>
+			<p className="text-text-secondary mb-8 text-lg">{slide.description}</p>
 
 			{Component ? (
 				<Component onComplete={onNext} data={slide.data} labels={slide.labels} />
 			) : (
-				<div className="p-8 border border-dashed border-[var(--color-error)] rounded-xl">
+				<div className="p-8 border border-dashed border-error rounded-xl">
 					Unknown interactive variant: {slide.variant}
 					<button onClick={onNext} className="block mt-4 text-sm underline">
 						Skip

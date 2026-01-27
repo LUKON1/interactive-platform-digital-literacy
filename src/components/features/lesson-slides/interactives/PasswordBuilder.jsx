@@ -50,29 +50,29 @@ export const PasswordBuilder = ({ onComplete }) => {
 	};
 
 	let StrengthIcon = Shield;
-	let color = "text-[var(--color-text-muted)]";
+	let color = "text-text-muted";
 	if (strength > 30) {
 		StrengthIcon = ShieldAlert;
-		color = "text-[var(--color-warning)]";
+		color = "text-warning";
 	}
 	if (strength > 80) {
 		StrengthIcon = ShieldCheck;
-		color = "text-[var(--color-success)]";
+		color = "text-success";
 	}
 
 	return (
 		<div className="w-full max-w-lg mx-auto">
 			<div className="surface-card p-8 text-center mb-8">
 				<motion.div
-					className={`w-24 h-24 mx-auto mb-6 rounded-full bg-[var(--color-bg-surface-3)] flex items-center justify-center ${color} transition-colors duration-500`}
+					className={`w-24 h-24 mx-auto mb-6 rounded-full bg-bg-surface-3 flex items-center justify-center ${color} transition-colors duration-500`}
 					animate={{ scale: isComplete ? [1, 1.2, 1] : 1 }}>
 					<StrengthIcon size={48} />
 				</motion.div>
 
 				<h3 className="text-2xl font-bold mb-2">Сила пароля: {strength}%</h3>
-				<div className="h-4 w-full bg-[var(--color-bg-surface-3)] rounded-full overflow-hidden mb-6">
+				<div className="h-4 w-full bg-bg-surface-3 rounded-full overflow-hidden mb-6">
 					<motion.div
-						className="h-full bg-gradient-to-r from-[var(--color-error)] via-[var(--color-warning)] to-[var(--color-success)]"
+						className="h-full bg-linear-to-r from-error via-warning to-success"
 						animate={{ width: `${strength}%` }}
 					/>
 				</div>
@@ -82,38 +82,32 @@ export const PasswordBuilder = ({ onComplete }) => {
 					value={password}
 					onChange={(e) => {
 						setPassword(e.target.value);
-						setCheckResult(null); // Reset result on typo
+						setCheckResult(null);
 					}}
-					placeholder="Введите пароль..."
-					className="w-full bg-[var(--color-bg-base)] border border-[var(--color-bg-surface-3)] rounded-xl px-4 py-3 text-xl text-center text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-primary)] transition-all"
+					placeholder="Создай надежный пароль или мнемофразу..."
+					className="w-full bg-bg-base border border-bg-surface-3 rounded-xl px-4 py-3 text-xl text-center text-text-primary focus:outline-none focus:border-primary transition-all"
 				/>
 
-				<div className="mt-4 text-sm text-[var(--color-text-secondary)] text-left space-y-2">
+				<div className="mt-4 text-sm text-text-secondary text-left space-y-2">
 					{password.length > 20 || /([a-zA-Z]+[^a-zA-Z]+){3,}/.test(password) ? (
-						<p className="text-[var(--color-success)] font-bold">Отличная мнемофраза</p>
+						<p className="text-success font-bold">⚡ Отличный пароль! Такой не взломать</p>
 					) : (
-						<p className={password.length >= 12 ? "text-[var(--color-success)]" : ""}>
+						<p className={password.length >= 12 ? "text-success" : ""}>
 							• Длина 12+ символов (или 4+ слова)
 						</p>
 					)}
-					<p className={/[A-Z]/.test(password) ? "text-[var(--color-success)]" : ""}>
-						• Заглавная буква
-					</p>
-					<p className={/[0-9]/.test(password) ? "text-[var(--color-success)]" : ""}>• Цифра</p>
-					<p className={/[!@#$%^&*]/.test(password) ? "text-[var(--color-success)]" : ""}>
-						• Спецсимвол (!@#$%)
-					</p>
+					<p className={/[A-Z]/.test(password) ? "text-success" : ""}>• Заглавная буква</p>
+					<p className={/[0-9]/.test(password) ? "text-success" : ""}>• Цифра</p>
+					<p className={/[!@#$%^&*]/.test(password) ? "text-success" : ""}>• Спецсимвол (!@#$%)</p>
 				</div>
 
 				{checkResult && (
 					<motion.div
 						initial={{ opacity: 0, height: 0 }}
 						animate={{ opacity: 1, height: "auto" }}
-						className="mt-6 p-4 bg-[var(--color-bg-surface-2)] rounded-xl border border-[var(--color-primary)]/20">
-						<div className="text-sm text-[var(--color-text-secondary)] mb-1">
-							Время на взлом (Брутфорс):
-						</div>
-						<div className="text-2xl font-bold text-[var(--color-primary)]">{checkResult.time}</div>
+						className="mt-6 p-4 bg-bg-surface-2 rounded-xl border border-primary/20">
+						<div className="text-sm text-text-secondary mb-1">Время на взлом (Брутфорс):</div>
+						<div className="text-2xl font-bold text-primary">{checkResult.time}</div>
 					</motion.div>
 				)}
 			</div>
@@ -128,7 +122,7 @@ export const PasswordBuilder = ({ onComplete }) => {
 			) : (
 				<button
 					onClick={handleNext}
-					className="btn-primary w-full py-4 text-lg font-bold bg-[var(--color-success)] hover:bg-[var(--color-success)]/90 border-transparent text-white">
+					className="btn-primary w-full py-4 text-lg font-bold bg-success hover:bg-success/90 border-transparent text-white">
 					Отлично! Продолжить
 				</button>
 			)}

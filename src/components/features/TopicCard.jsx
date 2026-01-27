@@ -32,25 +32,21 @@ export const TopicCard = ({ topic, progress = 0, onClick }) => {
 			)}
 
 			{/* Decorative Glow */}
-			<div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-primary)] opacity-5 blur-[50px] rounded-full translate-x-10 -translate-y-10 group-hover:opacity-10 transition-opacity" />
+			<div className="absolute top-0 right-0 w-32 h-32 bg-primary opacity-5 blur-[50px] rounded-full translate-x-10 -translate-y-10 group-hover:opacity-10 transition-opacity" />
 
 			<div className="flex justify-between items-start z-10">
-				<div className="p-3 rounded-2xl bg-[var(--color-bg-surface-2)] text-[var(--color-primary)]">
+				<div className="p-3 rounded-2xl bg-bg-surface-2 text-primary">
 					<Icon size={28} />
 				</div>
 				<ProgressRing progress={progress} size={52} strokeWidth={5} />
 			</div>
 
 			<div className="z-10 mt-2">
-				<h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-1">
-					{topic.title}
-				</h3>
-				<p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-					{topic.description}
-				</p>
+				<h3 className="text-xl font-semibold text-text-primary mb-1">{topic.title}</h3>
+				<p className="text-text-secondary text-sm leading-relaxed">{topic.description}</p>
 			</div>
 
-			<div className="mt-auto pt-4 flex items-center text-[var(--color-primary)] font-medium text-sm group-hover:translate-x-1 transition-transform">
+			<div className="mt-auto pt-4 flex items-center text-primary font-medium text-sm group-hover:translate-x-1 transition-transform">
 				Начать миссию <ArrowRight size={16} className="ml-2" />
 			</div>
 		</motion.div>

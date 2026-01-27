@@ -12,20 +12,20 @@ export const SkillNode = ({ topic, status, onClick, position, progress }) => {
 	const IconComponent = Icons[topic.icon] || Star;
 
 	// Determine styles based on status
-	let bgClass = "bg-[var(--color-bg-surface-2)]";
-	let borderClass = "border-[var(--color-bg-surface-3)]";
-	let iconColor = "text-[var(--color-text-muted)]";
+	let bgClass = "bg-bg-surface-2";
+	let borderClass = "border-bg-surface-3";
+	let iconColor = "text-text-muted";
 	let shadowClass = "";
 
 	if (isActive) {
-		bgClass = "bg-[var(--color-primary)]";
-		borderClass = "border-[var(--color-bg-base)]";
-		iconColor = "text-[var(--color-on-primary)]";
-		shadowClass = "shadow-[0_0_20px_rgba(var(--color-primary-rgb),0.5)] animate-pulse-slow";
+		bgClass = "bg-primary";
+		borderClass = "border-bg-base";
+		iconColor = "text-on-primary";
+		shadowClass = "shadow-[0_0_20px_rgba(208,188,255,0.5)] animate-pulse-slow";
 	} else if (isCompleted) {
-		bgClass = "bg-[var(--color-success)]";
-		borderClass = "border-[var(--color-bg-base)]";
-		iconColor = "textwhite";
+		bgClass = "bg-success";
+		borderClass = "border-success";
+		iconColor = "text-bg-base";
 	}
 
 	return (
@@ -49,16 +49,19 @@ export const SkillNode = ({ topic, status, onClick, position, progress }) => {
 				)}
 			</motion.button>
 
-			{/* Static Label (No scaling) */}
+			{/* Static Label - positioned below circle */}
 			<div
 				className={`
-            absolute -bottom-10 whitespace-nowrap font-bold text-sm px-3 py-1 rounded-full border 
+            absolute top-full mt-2
+            text-center text-xs md:text-sm font-bold 
+            px-2 md:px-3 py-1 rounded-full border 
+            max-w-30 md:max-w-none wrap-break-word md:whitespace-nowrap leading-tight z-20
             ${
 							isActive
-								? "bg-[var(--color-bg-surface-2)] border-[var(--color-primary)] text-[var(--color-primary)]"
+								? "bg-bg-surface-2 border-primary text-primary"
 								: isLocked
-									? "bg-[var(--color-bg-surface-1)] border-[var(--color-bg-surface-3)] text-[var(--color-text-muted)]"
-									: "bg-[var(--color-bg-surface-2)] border-[var(--color-success)] text-[var(--color-success)]"
+									? "bg-bg-surface-1 border-bg-surface-3 text-text-muted"
+									: "bg-bg-surface-2 border-success text-success"
 						}
         `}>
 				{topic.title}
