@@ -10,6 +10,7 @@ import { EmailInspector } from "./interactives/EmailInspector";
 import { CryptoTransactor } from "./interactives/CryptoTransactor";
 import { SocialDetective } from "./interactives/SocialDetective";
 import { DataBroker } from "./interactives/DataBroker";
+import { DeepfakeCall } from "./interactives/DeepfakeCall";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -23,6 +24,7 @@ const VARIANTS = {
 	"crypto-transactor": CryptoTransactor,
 	"social-detective": SocialDetective,
 	"data-broker": DataBroker,
+	"deepfake-call": DeepfakeCall,
 };
 
 export const InteractiveSlide = ({ slide, onNext, onPrevious, canGoPrevious, isCompleted }) => {

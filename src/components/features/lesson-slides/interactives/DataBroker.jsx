@@ -90,7 +90,7 @@ export const DataBroker = ({ data, onComplete, onPrevious, canGoPrevious, isComp
 				</p>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 min-h-[400px]">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 min-h-100">
 				{/* Left: Data Stream (Terminal Style) */}
 				<div className="bg-gray-900 rounded-2xl border border-gray-700 p-6 flex flex-col shadow-2xl relative overflow-hidden">
 					<div className="flex items-center gap-2 mb-4 text-gray-400 text-xs uppercase tracking-widest font-mono border-b border-gray-800 pb-2">
@@ -102,7 +102,7 @@ export const DataBroker = ({ data, onComplete, onPrevious, canGoPrevious, isComp
 
 					<div
 						ref={scrollRef}
-						className="flex-1 overflow-y-auto space-y-3 font-mono text-sm max-h-[400px]">
+						className="flex-1 max-h-100 overflow-y-auto space-y-3 font-mono text-sm custom-scrollbar">
 						<AnimatePresence>
 							{visibleItems.map((item, idx) => (
 								<motion.div
