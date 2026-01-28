@@ -8,6 +8,8 @@ import { TotpSimulator } from "./interactives/TotpSimulator";
 import { ImageQuiz } from "./interactives/ImageQuiz";
 import { EmailInspector } from "./interactives/EmailInspector";
 import { CryptoTransactor } from "./interactives/CryptoTransactor";
+import { SocialDetective } from "./interactives/SocialDetective";
+import { DataBroker } from "./interactives/DataBroker";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -19,6 +21,8 @@ const VARIANTS = {
 	"image-quiz": ImageQuiz,
 	"email-inspector": EmailInspector,
 	"crypto-transactor": CryptoTransactor,
+	"social-detective": SocialDetective,
+	"data-broker": DataBroker,
 };
 
 export const InteractiveSlide = ({ slide, onNext, onPrevious, canGoPrevious, isCompleted }) => {
