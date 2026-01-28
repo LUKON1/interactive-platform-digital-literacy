@@ -19,7 +19,7 @@ export const ProgressRing = ({
 			{/* Background Circle */}
 			<svg className="absolute w-full h-full -rotate-90">
 				<circle
-					className="text-[var(--color-bg-surface-3)]"
+					className="text-bg-surface-3"
 					strokeWidth={strokeWidth}
 					stroke="currentColor"
 					fill="transparent"
@@ -45,7 +45,7 @@ export const ProgressRing = ({
 				/>
 			</svg>
 			{/* Percentage Text */}
-			<span className="absolute text-sm font-bold text-[var(--color-text-secondary)]">
+			<span className="absolute text-sm font-bold text-text-secondary">
 				{Math.round(progress)}%
 			</span>
 		</div>

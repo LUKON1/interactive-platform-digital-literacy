@@ -52,7 +52,7 @@ export const useProgressStore = create(
 						(state.topicLessons && state.topicLessons[topicId]?.includes(l)),
 				).length;
 				// Since our IDs are not strictly prefixed (e.g. 'lesson-1'), we might need a better check.
-				// BUT, looking at lessons.js: 'cyber-hygiene' -> 'lesson-1'. The lesson IDs are generic 'lesson-1'.
+				// BUT, looking at lessons.js: 'digital-fortress' -> 'df-lesson-1'.
 				// This is a problem! 'lesson-1' exists in multiple topics?
 				// Let's check lessons.js. If IDs are unique or scoped.
 				return 0; // Placeholder until ID check

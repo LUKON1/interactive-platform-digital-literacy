@@ -1,7 +1,7 @@
 export const LESSONS = {
-	"cyber-hygiene": [
+	"digital-fortress": [
 		{
-			id: "ch-lesson-1",
+			id: "df-lesson-1",
 			title: "Магия сильных паролей",
 			description:
 				'Почему "123456" — это плохая идея и как создать пароль, который не взломают за миллиард лет.',
@@ -102,7 +102,7 @@ export const LESSONS = {
 			],
 		},
 		{
-			id: "ch-lesson-2",
+			id: "df-lesson-2",
 			title: "Двухфакторная аутентификация (2FA)",
 			description: "Зачем нужен второй ключ от твоего цифрового дома.",
 			duration: "7 мин",

@@ -1,6 +1,6 @@
 export const TOPICS = [
 	{
-		id: "cyber-hygiene",
+		id: "digital-fortress",
 		title: "Цифровая Крепость",
 		description: "Создание паролей и базовая защита.",
 		icon: "ShieldCheck",
