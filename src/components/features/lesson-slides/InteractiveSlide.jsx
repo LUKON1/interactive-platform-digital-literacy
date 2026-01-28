@@ -7,6 +7,7 @@ import { CryptoScanner } from "./interactives/CryptoScanner";
 import { TotpSimulator } from "./interactives/TotpSimulator";
 import { ImageQuiz } from "./interactives/ImageQuiz";
 import { EmailInspector } from "./interactives/EmailInspector";
+import { CryptoTransactor } from "./interactives/CryptoTransactor";
 
 const VARIANTS = {
 	"password-builder": PasswordBuilder,
@@ -17,6 +18,7 @@ const VARIANTS = {
 	"totp-simulator": TotpSimulator,
 	"image-quiz": ImageQuiz,
 	"email-inspector": EmailInspector,
+	"crypto-transactor": CryptoTransactor,
 };
 
 export const InteractiveSlide = ({ slide, onNext, onPrevious, canGoPrevious, isCompleted }) => {

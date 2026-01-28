@@ -8,6 +8,7 @@ import {
 } from "@dnd-kit/core";
 import { motion, AnimatePresence } from "motion/react";
 import { Check, X, ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { InteractiveNavigation } from "./InteractiveNavigation";
 
 /* --- Draggable Item --- */
 const DraggableItem = ({ id, content, isOverlay = false }) => {
@@ -231,44 +232,14 @@ export const TermSorter = ({
 					) : null}
 				</DragOverlay>
 			</DndContext>
-
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center gap-4 mt-8">
-				{canGoPrevious ? (
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						onClick={onPrevious}
-						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
-						<ArrowLeft size={20} className="mr-2" />
-						Назад
-					</motion.button>
-				) : (
-					<div />
-				)}
-
-				<motion.button
-					whileHover={isCompleted || allSorted ? { scale: 1.05 } : {}}
-					whileTap={isCompleted || allSorted ? { scale: 0.95 } : {}}
-					onClick={isCompleted || allSorted ? onComplete : undefined}
-					disabled={!isCompleted && !allSorted}
-					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
-						isCompleted || allSorted
-							? "btn-primary shadow-lg shadow-primary/20"
-							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
-					}`}>
-					{isCompleted || allSorted ? (
-						<>
-							Далее <ArrowRight size={20} className="ml-2" />
-						</>
-					) : (
-						<>
-							<Lock size={16} className="mr-2" />
-							Завершите сортировку
-						</>
-					)}
-				</motion.button>
-			</div>
+			<InteractiveNavigation
+				onPrevious={onPrevious}
+				canGoPrevious={canGoPrevious}
+				onNext={onComplete}
+				isCompleted={isCompleted || allSorted}
+				lockedMessage="Завершите сортировку"
+			/>
 		</div>
 	);
 };

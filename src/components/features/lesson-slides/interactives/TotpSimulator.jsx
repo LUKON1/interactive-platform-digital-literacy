@@ -10,6 +10,7 @@ import {
 	ArrowRight,
 	Lock,
 } from "lucide-react";
+import { InteractiveNavigation } from "./InteractiveNavigation";
 
 export const TotpSimulator = ({ onComplete, onPrevious, canGoPrevious, isCompleted, onNext }) => {
 	const [timeLeft, setTimeLeft] = useState(30);
@@ -180,44 +181,14 @@ export const TotpSimulator = ({ onComplete, onPrevious, canGoPrevious, isComplet
 					</>
 				)}
 			</div>
-
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center gap-4 mt-8">
-				{canGoPrevious ? (
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						onClick={onPrevious}
-						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
-						<ArrowLeft size={20} className="mr-2" />
-						Назад
-					</motion.button>
-				) : (
-					<div />
-				)}
-
-				<motion.button
-					whileHover={isSuccess ? { scale: 1.05 } : {}}
-					whileTap={isSuccess ? { scale: 0.95 } : {}}
-					onClick={isSuccess ? onComplete : undefined}
-					disabled={!isSuccess}
-					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
-						isSuccess
-							? "btn-primary shadow-lg shadow-primary/20"
-							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
-					}`}>
-					{isSuccess ? (
-						<>
-							Далее <ArrowRight size={20} className="ml-2" />
-						</>
-					) : (
-						<>
-							<Lock size={16} className="mr-2" />
-							Введите код
-						</>
-					)}
-				</motion.button>
-			</div>
+			<InteractiveNavigation
+				onPrevious={onPrevious}
+				canGoPrevious={canGoPrevious}
+				onNext={onComplete}
+				isCompleted={isSuccess}
+				lockedMessage="Введите код"
+			/>
 		</div>
 	);
 };
