@@ -7,36 +7,36 @@ import { InteractiveNavigation } from "./InteractiveNavigation";
 const ARTIFACTS = [
 	{
 		id: "eyes",
-		x: 45, // percentage from left
-		y: 28, // percentage from top
-		radius: 8,
+		x: 50, // percentage from left
+		y: 30, // percentage from top
+		radius: 12,
 		label: "Неестественные глаза",
 		description: "Отражения в глазах не совпадают с освещением. Зрачки разного размера.",
 		hint: "Обрати внимание на область глаз",
 	},
 	{
 		id: "hairline",
-		x: 50,
-		y: 15,
-		radius: 10,
+		x: 45,
+		y: 8,
+		radius: 15,
 		label: "Размытая линия волос",
 		description: "Граница между волосами и кожей нечёткая, видны артефакты наложения.",
 		hint: "Посмотри на границу роста волос",
 	},
 	{
 		id: "teeth",
-		x: 48,
-		y: 60,
-		radius: 7,
+		x: 50,
+		y: 53,
+		radius: 10,
 		label: "Странные зубы",
 		description: "Зубы выглядят размыто, симметрия нарушена. Типичный признак дипфейка.",
 		hint: "Проверь область рта и зубов",
 	},
 	{
 		id: "neck",
-		x: 50,
-		y: 85,
-		radius: 9,
+		x: 25,
+		y: 70,
+		radius: 14,
 		label: "Резкая граница на шее",
 		description: "Видна чёткая граница там, где маска встречается с телом. Цвет кожи отличается.",
 		hint: "Посмотри на переход от лица к шее",
@@ -52,27 +52,12 @@ export const ImageComparison = ({ onComplete, onPrevious, canGoPrevious, isCompl
 	);
 	const [selectedArtifact, setSelectedArtifact] = useState(null);
 	const [showHints, setShowHints] = useState(false);
-	const [clickedWrong, setClickedWrong] = useState(false);
 
-	const handleImageClick = (e) => {
-		const rect = e.currentTarget.getBoundingClientRect();
-		const x = ((e.clientX - rect.left) / rect.width) * 100;
-		const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-		// Check if clicked near an artifact
-		const clickedArtifact = ARTIFACTS.find((artifact) => {
-			const distance = Math.sqrt(Math.pow(artifact.x - x, 2) + Math.pow(artifact.y - y, 2));
-			return distance < artifact.radius;
-		});
-
-		if (clickedArtifact && !foundArtifacts.has(clickedArtifact.id)) {
+	const handleArtifactClick = (artifact) => {
+		if (!foundArtifacts.has(artifact.id)) {
 			// Found a new artifact
-			setFoundArtifacts((prev) => new Set([...prev, clickedArtifact.id]));
-			setSelectedArtifact(clickedArtifact);
-		} else if (!clickedArtifact) {
-			// Clicked wrong area
-			setClickedWrong(true);
-			setTimeout(() => setClickedWrong(false), 500);
+			setFoundArtifacts((prev) => new Set([...prev, artifact.id]));
+			setSelectedArtifact(artifact);
 		}
 	};
 
@@ -97,44 +82,58 @@ export const ImageComparison = ({ onComplete, onPrevious, canGoPrevious, isCompl
 			<div className="flex-1 flex items-center justify-center mb-6 relative">
 				<div className="relative max-w-md w-full">
 					{/* Image with clickable overlay */}
-					<div
-						onClick={handleImageClick}
-						className={`
-							relative cursor-crosshair rounded-2xl overflow-hidden
-							shadow-2xl border-4 transition-all
-							${clickedWrong ? "border-error shake" : "border-bg-surface-3"}
-						`}>
+					<div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-bg-surface-3">
 						{/* Deepfake image */}
 						<img
 							src={imageUrl}
 							alt="Deepfake analysis"
+							onClick={(e) => e.preventDefault()}
+							onDragStart={(e) => e.preventDefault()}
 							className="w-full h-full object-cover aspect-3/4"
 						/>
 
-						{/* Found artifact markers */}
+						{/* Interactive artifact zones */}
 						{ARTIFACTS.map((artifact) => {
 							const isFound = foundArtifacts.has(artifact.id);
-							if (!isFound && !showHints) return null;
 
 							return (
-								<motion.div
+								<motion.button
 									key={artifact.id}
 									initial={{ scale: 0 }}
 									animate={{ scale: 1 }}
-									className="absolute"
+									onClick={() => handleArtifactClick(artifact)}
+									disabled={isFound}
+									className={`absolute group ${isFound ? "pointer-events-auto cursor-default" : "opacity-0 cursor-pointer"}`}
 									style={{
 										left: `${artifact.x}%`,
 										top: `${artifact.y}%`,
 										transform: "translate(-50%, -50%)",
+										width: `${artifact.radius * 2}%`,
+										aspectRatio: "1/1",
 									}}>
+									{/* Found state - green circle with checkmark */}
 									{isFound ? (
-										<div className="w-12 h-12 rounded-full bg-success/80 flex items-center justify-center border-4 border-white shadow-lg animate-pulse">
-											<CheckCircle size={24} className="text-white" />
+										<div className="w-full h-full rounded-full bg-success/30 border-2 border-success flex items-center justify-center shadow-lg">
+											<CheckCircle className="text-success w-1/2 h-1/2" />
 										</div>
 									) : (
-										<div className="w-8 h-8 rounded-full border-2 border-dashed border-primary/50 animate-pulse" />
+										<>
+											{/* Default and hover state - circle with magnifying glass */}
+											<div className="w-full h-full rounded-full bg-primary/10 border-2 border-primary/30 border-dashed flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
+												<Search className="text-primary/70 w-1/3 h-1/3" />
+											</div>
+
+											{/* Hint state - pulsing dashed circle */}
+											{showHints && (
+												<motion.div
+													initial={{ scale: 0.8, opacity: 0 }}
+													animate={{ scale: 1, opacity: 1 }}
+													className="absolute inset-0 w-full h-full rounded-full border-2 border-dashed border-primary/60 animate-pulse pointer-events-none"
+												/>
+											)}
+										</>
 									)}
-								</motion.div>
+								</motion.button>
 							);
 						})}
 					</div>

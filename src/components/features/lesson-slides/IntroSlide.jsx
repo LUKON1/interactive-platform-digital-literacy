@@ -44,7 +44,7 @@ export const IntroSlide = ({ slide, onNext, onPrevious, onClose, canGoPrevious }
 						<ReactMarkdown
 							components={{
 								strong: ({ node, ...props }) => (
-									<strong className="text-text-primary font-bold text-primary" {...props} />
+									<strong className=" font-bold text-primary" {...props} />
 								),
 								p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
 							}}>

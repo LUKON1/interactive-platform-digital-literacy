@@ -1019,7 +1019,7 @@ https://yandex-security-check.net/verify?id=Y8KL29
 					description:
 						"Перед тобой дипфейк-изображение. Кликай на подозрительные области, чтобы найти признаки подделки.",
 					data: {
-						image: "/assets/deepfake-face-artifacts.png",
+						image: "/assets/deepfake-face-subtle.png",
 						requiredFinds: 3,
 					},
 				},
