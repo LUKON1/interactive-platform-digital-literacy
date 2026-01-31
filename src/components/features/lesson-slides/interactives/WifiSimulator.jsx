@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-	Wifi,
-	Lock,
-	ShieldCheck,
-	ShieldAlert,
-	Smartphone,
-	ArrowLeft,
-	ArrowRight,
-} from "lucide-react";
+import { Wifi, Lock, ShieldCheck, ShieldAlert, Smartphone } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { InteractiveNavigation } from "./InteractiveNavigation";
 
 export const WifiSimulator = ({ onComplete, onPrevious, canGoPrevious, isCompleted, onNext }) => {
 	const [vpnEnabled, setVpnEnabled] = useState(false);
@@ -238,41 +231,14 @@ export const WifiSimulator = ({ onComplete, onPrevious, canGoPrevious, isComplet
 			</div>
 
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center gap-4 mt-8 px-4">
-				{canGoPrevious ? (
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						onClick={onPrevious}
-						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
-						<ArrowLeft size={20} className="mr-2" />
-						Назад
-					</motion.button>
-				) : (
-					<div />
-				)}
-
-				<motion.button
-					whileHover={isSuccess ? { scale: 1.05 } : {}}
-					whileTap={isSuccess ? { scale: 0.95 } : {}}
-					onClick={isSuccess ? onComplete : undefined}
-					disabled={!isSuccess}
-					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
-						isSuccess
-							? "btn-primary shadow-lg shadow-primary/20"
-							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
-					}`}>
-					{isSuccess ? (
-						<>
-							Далее <ArrowRight size={20} className="ml-2" />
-						</>
-					) : (
-						<>
-							<Lock size={16} className="mr-2" />
-							Выберите сеть
-						</>
-					)}
-				</motion.button>
+			<div className="w-full px-4">
+				<InteractiveNavigation
+					onPrevious={onPrevious}
+					canGoPrevious={canGoPrevious}
+					onNext={isSuccess ? onComplete : undefined}
+					isCompleted={isSuccess}
+					lockedMessage="Выберите сеть"
+				/>
 			</div>
 		</div>
 	);

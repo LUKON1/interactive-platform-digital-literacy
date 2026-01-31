@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Shield, ShieldAlert, ShieldCheck, ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { Shield, ShieldAlert, ShieldCheck } from "lucide-react";
+import { InteractiveNavigation } from "./InteractiveNavigation";
 
 export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompleted, onNext }) => {
 	// Pre-fill if completed to show success state
@@ -127,42 +128,13 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 			)}
 
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center gap-4 mt-8">
-				{canGoPrevious ? (
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						onClick={onPrevious}
-						className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3">
-						<ArrowLeft size={20} className="mr-2" />
-						Назад
-					</motion.button>
-				) : (
-					<div />
-				)}
-
-				<motion.button
-					whileHover={isComplete && checkResult ? { scale: 1.05 } : {}}
-					whileTap={isComplete && checkResult ? { scale: 0.95 } : {}}
-					onClick={isComplete && checkResult ? onComplete : undefined}
-					disabled={!isComplete || !checkResult}
-					className={`flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all ${
-						isComplete && checkResult
-							? "btn-primary shadow-lg shadow-primary/20"
-							: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
-					}`}>
-					{isComplete && checkResult ? (
-						<>
-							Далее <ArrowRight size={20} className="ml-2" />
-						</>
-					) : (
-						<>
-							<Lock size={16} className="mr-2" />
-							Проверьте пароль
-						</>
-					)}
-				</motion.button>
-			</div>
+			<InteractiveNavigation
+				onPrevious={onPrevious}
+				canGoPrevious={canGoPrevious}
+				onNext={onComplete}
+				isCompleted={isComplete && checkResult}
+				lockedMessage="Проверьте пароль"
+			/>
 		</div>
 	);
 };

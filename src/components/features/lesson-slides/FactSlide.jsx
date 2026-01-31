@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowRight, ArrowLeft, Lightbulb } from "lucide-react";
+import { ArrowRight, ArrowLeft, Lightbulb, Zap } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
@@ -14,37 +14,42 @@ export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 		: "";
 
 	return (
-		<div className="min-h-full flex flex-col items-center justify-center p-4 pb-6 sm:p-6 sm:pb-8 text-center max-w-3xl mx-auto">
+		<div className="min-h-full flex flex-col items-center justify-center p-4 pb-6 sm:p-6 sm:pb-8 text-center max-w-4xl mx-auto w-full">
 			<div className="flex-1 flex flex-col items-center justify-center w-full">
 				<motion.div
-					initial={{ scale: 0.9, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
-					className="surface-card p-6 sm:p-8 md:p-10 border-2 border-primary/20 relative overflow-hidden w-full max-w-2xl motion-safe">
+					initial={{ scale: 0.9, opacity: 0, y: 20 }}
+					animate={{ scale: 1, opacity: 1, y: 0 }}
+					transition={{ type: "spring", stiffness: 260, damping: 20 }}
+					className="surface-card p-6 sm:p-10 md:p-12 border-2 border-warning/20 bg-warning/5 relative overflow-hidden w-full max-w-3xl motion-safe">
 					{/* Background Sparkles */}
-					<div className="absolute top-0 right-0 w-64 h-64 bg-primary opacity-10 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+					<div className="absolute top-0 right-0 w-80 h-80 bg-warning/20 opacity-30 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+					<div className="absolute bottom-0 left-0 w-60 h-60 bg-warning/10 opacity-30 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-					<div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-bg-surface-3 flex items-center justify-center mx-auto text-primary mb-4 sm:mb-6">
-						<Lightbulb size={24} className="sm:w-8 sm:h-8" />
-					</div>
+					<motion.div
+						animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1.05, 0.95] }}
+						transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+						className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-linear-to-br from-warning to-orange-500 flex items-center justify-center mx-auto text-white mb-6 sm:mb-8 shadow-lg shadow-warning/30 motion-safe">
+						<Lightbulb size={32} className="sm:w-10 sm:h-10 fill-current" />
+					</motion.div>
 
-					<h2 className="text-lg sm:text-xl md:text-2xl font-bold text-primary mb-3 sm:mb-4 uppercase tracking-wider">
-						Интересный факт
+					<h2 className="text-sm sm:text-base font-bold text-warning uppercase tracking-widest mb-3 flex items-center justify-center gap-2">
+						<Zap size={14} /> Интересный факт
 					</h2>
 
-					<h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-primary mb-4 sm:mb-6">
+					<h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-primary mb-6 sm:mb-8 leading-tight">
 						{slide.title}
 					</h3>
 
-					<div className="text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed">
+					<div className="text-lg sm:text-xl md:text-2xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
 						<ReactMarkdown
 							components={{
 								strong: ({ node, ...props }) => (
 									<strong
-										className="text-text-primary font-bold text-lg sm:text-xl md:text-2xl"
+										className="text-text-primary font-black bg-warning/10 px-1 rounded"
 										{...props}
 									/>
-								), // Bigger bold for facts
-								p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
+								),
+								p: ({ node, ...props }) => <p className="mb-6 last:mb-0" {...props} />,
 							}}>
 							{cleanContent}
 						</ReactMarkdown>
@@ -53,14 +58,14 @@ export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 			</div>
 
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center pt-6 sm:pt-8 gap-3 sm:gap-4">
+			<div className="w-full flex justify-between items-center pt-8 sm:pt-10 gap-4 sm:gap-6 mt-4">
 				{canGoPrevious ? (
 					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
+						whileHover={{ scale: 1.02, x: -3 }}
+						whileTap={{ scale: 0.98 }}
 						onClick={onPrevious}
-						className="btn-secondary flex items-center text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4">
-						<ArrowLeft size={16} className="mr-1 sm:mr-2 sm:w-5 sm:h-5" />
+						className="btn-ghost flex items-center text-sm sm:text-base font-medium text-text-muted hover:text-text-primary px-4 py-3 transition-colors motion-safe">
+						<ArrowLeft size={18} className="mr-2" />
 						Назад
 					</motion.button>
 				) : (
@@ -68,11 +73,11 @@ export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 				)}
 
 				<motion.button
-					whileHover={{ scale: 1.05 }}
+					whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
 					whileTap={{ scale: 0.95 }}
 					onClick={onNext}
-					className="btn-primary flex items-center text-sm sm:text-base md:text-lg px-6 py-3 sm:px-10 sm:py-3 md:px-12 md:py-4 shadow-lg shadow-primary/20">
-					Продолжить <ArrowRight size={16} className="ml-1 sm:ml-2 sm:w-5 sm:h-5" />
+					className="btn-primary flex items-center text-sm sm:text-base md:text-lg font-bold px-6 py-3 sm:px-10 sm:py-4 rounded-xl shadow-lg shadow-primary/20 motion-safe">
+					Продолжить <ArrowRight size={18} className="ml-2" />
 				</motion.button>
 			</div>
 		</div>

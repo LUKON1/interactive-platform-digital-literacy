@@ -63,11 +63,12 @@ export const LibraryPage = () => {
 				})}
 			</motion.div>
 
-			{/* Decorative Blur Backgrounds */}
+			{/* Decorative Blur Backgrounds - Commented out to prioritize Cyber Grid
 			<div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
 				<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-on-primary rounded-full blur-[120px] opacity-20" />
 				<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary rounded-full blur-[120px] opacity-10" />
 			</div>
+            */}
 		</div>
 	);
 };

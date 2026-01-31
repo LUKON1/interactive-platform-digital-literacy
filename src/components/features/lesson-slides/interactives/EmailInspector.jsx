@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-	Mail,
-	AlertTriangle,
-	CheckCircle,
-	X,
-	Eye,
-	ArrowLeft,
-	ArrowRight,
-	Lock,
-} from "lucide-react";
+import { Mail, AlertTriangle, CheckCircle, X, Eye } from "lucide-react";
+import { InteractiveNavigation } from "./InteractiveNavigation";
 
 export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isCompleted, data }) => {
 	const { from, subject, date, body, redFlags } = data;
@@ -210,42 +202,13 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 				</div>
 
 				{/* Navigation Buttons */}
-				<div className="w-full flex justify-between items-center gap-3 sm:gap-4">
-					{canGoPrevious ? (
-						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							onClick={onPrevious}
-							className="btn-secondary flex items-center text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4">
-							<ArrowLeft size={16} className="mr-1 sm:mr-2 sm:w-5 sm:h-5" />
-							Назад
-						</motion.button>
-					) : (
-						<div />
-					)}
-
-					<motion.button
-						whileHover={isComplete ? { scale: 1.05 } : {}}
-						whileTap={isComplete ? { scale: 0.95 } : {}}
-						onClick={isComplete ? onComplete : undefined}
-						disabled={!isComplete}
-						className={`flex items-center justify-center text-sm sm:text-base md:text-lg px-6 py-3 sm:px-10 sm:py-3 md:px-12 md:py-4 rounded-full transition-all ${
-							isComplete
-								? "btn-primary shadow-lg shadow-primary/20"
-								: "bg-bg-surface-2/50 text-text-muted cursor-not-allowed border-2 border-bg-surface-3"
-						}`}>
-						{isComplete ? (
-							<>
-								Далее <ArrowRight size={16} className="ml-1 sm:ml-2 sm:w-5 sm:h-5" />
-							</>
-						) : (
-							<>
-								<Lock size={16} className="mr-1 sm:mr-2 sm:w-5 sm:h-5" />
-								Завершите задание
-							</>
-						)}
-					</motion.button>
-				</div>
+				<InteractiveNavigation
+					onPrevious={onPrevious}
+					canGoPrevious={canGoPrevious}
+					onNext={onComplete}
+					isCompleted={isComplete}
+					lockedMessage="Найдите все угрозы"
+				/>
 			</div>
 
 			{/* Modal: Flag Details */}

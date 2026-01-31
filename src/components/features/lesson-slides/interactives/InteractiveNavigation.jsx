@@ -12,39 +12,41 @@ export const InteractiveNavigation = ({
 	nextLabel = "Далее",
 }) => {
 	return (
-		<div className="w-full flex justify-between items-center gap-4 mt-8">
+		<div className="w-full flex justify-between items-center pt-6 sm:pt-8 gap-3 sm:gap-4 mt-auto border-t border-bg-surface-3/50 backdrop-blur-sm">
 			{canGoPrevious ? (
 				<motion.button
-					whileHover={{ scale: 1.05 }}
-					whileTap={{ scale: 0.95 }}
+					whileHover={{ scale: 1.02, x: -3 }}
+					whileTap={{ scale: 0.98 }}
 					onClick={onPrevious}
-					className="btn-secondary flex items-center text-sm sm:text-base px-6 py-3 rounded-xl transition-colors hover:bg-bg-surface-2 text-text-secondary hover:text-text-primary">
-					<ArrowLeft size={20} className="mr-2" />
+					className="btn-ghost flex items-center text-sm sm:text-base font-medium text-text-muted hover:text-text-primary px-4 py-3 transition-colors motion-safe">
+					<ArrowLeft size={18} className="mr-2" />
 					Назад
 				</motion.button>
 			) : (
-				<div /> // Spacer to keep "Next" button on the right
+				<div />
 			)}
 
 			<motion.button
-				whileHover={isCompleted ? { scale: 1.05 } : {}}
+				whileHover={
+					isCompleted ? { scale: 1.05, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" } : {}
+				}
 				whileTap={isCompleted ? { scale: 0.95 } : {}}
 				onClick={isCompleted ? onNext : undefined}
 				disabled={!isCompleted}
 				className={clsx(
-					"flex items-center justify-center text-sm sm:text-base px-8 py-3 rounded-full transition-all border-2",
+					"flex items-center text-sm sm:text-base md:text-lg font-bold px-6 py-3 sm:px-10 sm:py-4 rounded-xl shadow-lg transition-all motion-safe",
 					isCompleted
-						? "bg-primary text-on-primary border-primary shadow-lg shadow-primary/20 hover:brightness-110 cursor-pointer"
-						: "bg-bg-surface-2/50 text-text-muted border-bg-surface-3 cursor-not-allowed",
+						? "btn-primary shadow-primary/20 cursor-pointer"
+						: "bg-bg-surface-3 text-text-muted cursor-not-allowed shadow-none",
 				)}>
 				{isCompleted ? (
 					<>
-						{nextLabel} <ArrowRight size={20} className="ml-2" />
+						{nextLabel} <ArrowRight size={18} className="ml-2" />
 					</>
 				) : (
 					<>
-						<Lock size={16} className="mr-2" />
-						{lockedMessage}
+						<Lock size={18} className="mr-2 opacity-50" />
+						<span className="opacity-75">{lockedMessage}</span>
 					</>
 				)}
 			</motion.button>

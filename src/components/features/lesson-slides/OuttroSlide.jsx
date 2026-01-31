@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { CheckCircle, Home } from "lucide-react";
+import { CheckCircle, Home, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
@@ -14,60 +14,69 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 	const cleanContent = slide.content || "";
 
 	return (
-		<div className="h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center py-8 sm:py-12">
+		<div className="min-h-full flex flex-col items-center justify-center p-4 pb-6 sm:p-6 sm:pb-8 md:p-8 md:pb-10 text-center max-w-4xl mx-auto w-full relative z-10">
+			{/* Confetti Background Effect (Simulated with gradients) */}
+			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl max-h-2xl radial-progress opacity-20 pointer-events-none -z-10" />
+
 			<motion.div
 				initial={{ scale: 0, rotate: -180 }}
 				animate={{ scale: 1, rotate: 0 }}
-				transition={{ type: "spring", damping: 12 }}
-				className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-success text-bg-base flex items-center justify-center mb-4 sm:mb-6 md:mb-8 shrink-0 motion-safe">
-				<CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16" />
+				transition={{ type: "spring", damping: 12, stiffness: 200 }}
+				className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-success text-bg-base flex items-center justify-center mb-6 sm:mb-8 shadow-2xl shadow-success/30 motion-safe relative">
+				<div className="absolute inset-0 rounded-full border-4 border-white/20 animate-pulse" />
+				<CheckCircle className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 drop-shadow-md" />
 			</motion.div>
 
-			<motion.h1
+			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.3 }}
-				className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-3 sm:mb-4 px-2 motion-safe">
-				{slide.title}
-			</motion.h1>
+				className="space-y-2 mb-8 sm:mb-10 text-center w-full motion-safe">
+				<div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-success/10 text-success text-sm font-bold uppercase tracking-wider mb-2">
+					<Award size={16} /> Урок пройден
+				</div>
+				<h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-text-primary leading-tight">
+					{slide.title}
+				</h1>
+			</motion.div>
 
 			<motion.div
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.5 }}
-				className="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mb-6 sm:mb-8 md:mb-12 w-full px-2 motion-safe">
+				className="surface-card p-6 sm:p-8 md:p-10 text-base sm:text-lg text-text-secondary leading-relaxed w-full shadow-xl border border-bg-surface-3 relative overflow-hidden motion-safe">
 				<ReactMarkdown
 					components={{
 						h2: ({ ...props }) => (
-							<h2 className="text-2xl font-bold text-text-primary mb-6 text-center" {...props} />
-						),
-						blockquote: ({ ...props }) => (
-							<div className="surface-card p-6 mb-4 rounded-xl border-l-4 border-primary text-left">
-								<div className="prose-blockquote" {...props} />
-							</div>
-						),
-						p: ({ ...props }) => <p className="text-text-secondary leading-relaxed" {...props} />,
-						strong: ({ ...props }) => <strong className="text-text-primary font-bold" {...props} />,
-						code: ({ ...props }) => (
-							<code
-								className="px-2 py-1 bg-bg-surface-3 rounded text-primary font-mono text-sm"
+							<h3
+								className="text-xl sm:text-2xl font-bold text-text-primary mb-6 text-center border-b border-bg-surface-3 pb-4"
 								{...props}
 							/>
 						),
-						hr: () => (
-							<hr className="my-8 border-0 h-px bg-linear-to-r from-transparent via-bg-surface-3 to-transparent opacity-50" />
+						blockquote: ({ ...props }) => (
+							<div className="grid gap-4 text-left">
+								{/* We'll style blockquotes as a list of key takeaways */}
+								{props.children}
+							</div>
 						),
+						p: ({ ...props }) => {
+							// Check if paragraph is inside blockquote (simplified check via context or content)
+							// For now, standard p styling
+							return <p className="mb-4 last:mb-0 text-text-primary/90" {...props} />;
+						},
+						// Assuming the content uses blockquotes > for list items as per existing data structure
+						// But standard markdown might be better. We will adapt content in lessons.js to use clearer lists or keep > indent
 					}}>
 					{cleanContent}
 				</ReactMarkdown>
 			</motion.div>
 
 			<motion.button
-				whileHover={{ scale: 1.05 }}
+				whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
 				whileTap={{ scale: 0.95 }}
 				onClick={() => navigate(`/topic/${topicId}`)}
-				className="btn-primary flex items-center text-base sm:text-lg px-8 sm:px-10 md:px-12 py-3 sm:py-4 mt-6 sm:mt-8 md:mt-12 text-text-primary! bg-transparent! border border-bg-surface-3 hover:bg-bg-surface-2! mb-4 sm:mb-0">
-				<Home className="w-4 h-4 sm:w-5 sm:h-5 mr-2" /> Вернуться назад
+				className="btn-primary flex items-center text-base sm:text-lg font-bold px-8 py-4 sm:px-10 sm:py-5 mt-8 sm:mt-10 rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/30 motion-safe">
+				<Home className="w-5 h-5 mr-2" /> Вернуться к списку
 			</motion.button>
 		</div>
 	);

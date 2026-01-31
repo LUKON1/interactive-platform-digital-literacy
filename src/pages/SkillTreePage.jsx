@@ -48,7 +48,7 @@ export const SkillTreePage = () => {
 	};
 
 	return (
-		<div className="min-h-screen pb-20 bg-bg-base overflow-x-hidden">
+		<div className="min-h-screen pb-20 overflow-x-hidden">
 			{/* Hero Section */}
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
@@ -67,8 +67,6 @@ export const SkillTreePage = () => {
 
 			{/* Tiered Tree Viz */}
 			<div className="max-w-4xl mx-auto px-6 py-8 relative">
-				<div className="absolute left-1/2 top-10 bottom-10 w-1 bg-bg-surface-3 -translate-x-1/2 -z-10 rounded-full opacity-30" />
-
 				<motion.div
 					variants={containerVariants}
 					initial="hidden"

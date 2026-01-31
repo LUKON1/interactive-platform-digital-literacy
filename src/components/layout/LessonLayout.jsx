@@ -2,12 +2,14 @@ import React from "react";
 import { motion } from "motion/react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { CyberGridBackground } from "../ui/CyberGridBackground";
 
 export const LessonLayout = ({ children, title, progress, onClose }) => {
 	return (
-		<div className="fixed inset-0 bg-bg-base flex flex-col z-50">
+		<div className="fixed inset-0 flex flex-col z-50">
+			<CyberGridBackground />
 			{/* Header */}
-			<header className="h-16 px-6 flex items-center justify-between border-b border-bg-surface-3 bg-bg-surface-1">
+			<header className="h-16 px-6 flex items-center justify-between border-b border-bg-surface-3 bg-bg-surface-1 relative z-10">
 				<div className="flex items-center gap-4">
 					<button
 						onClick={onClose}
@@ -29,7 +31,7 @@ export const LessonLayout = ({ children, title, progress, onClose }) => {
 			</header>
 
 			{/* Main Content Area */}
-			<main className="flex-1 overflow-y-auto overflow-x-hidden relative">{children}</main>
+			<main className="flex-1 overflow-y-auto overflow-x-hidden relative z-10">{children}</main>
 		</div>
 	);
 };
