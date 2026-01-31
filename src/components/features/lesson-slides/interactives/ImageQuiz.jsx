@@ -29,7 +29,7 @@ export const ImageQuiz = ({ onComplete, onPrevious, canGoPrevious, isCompleted, 
 	};
 
 	return (
-		<div className="w-full max-w-4xl mx-auto p-6">
+		<div className="w-full max-w-4xl mx-auto flex flex-col h-full p-6">
 			{/* Title and Description */}
 			<div className="text-center mb-8">
 				<h2 className="text-3xl font-bold text-text-primary mb-3">{data.title}</h2>

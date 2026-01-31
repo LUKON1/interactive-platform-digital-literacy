@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { CheckCircle, Home, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { LessonNavigation } from "./LessonNavigation";
 
 export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 	const navigate = useNavigate();
@@ -71,13 +72,7 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 				</ReactMarkdown>
 			</motion.div>
 
-			<motion.button
-				whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
-				whileTap={{ scale: 0.95 }}
-				onClick={() => navigate(`/topic/${topicId}`)}
-				className="btn-primary flex items-center text-base sm:text-lg font-bold px-8 py-4 sm:px-10 sm:py-5 mt-8 sm:mt-10 rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/30 motion-safe">
-				<Home className="w-5 h-5 mr-2" /> Вернуться к списку
-			</motion.button>
+			<LessonNavigation showHome={true} onHome={() => navigate(`/topic/${topicId}`)} />
 		</div>
 	);
 };

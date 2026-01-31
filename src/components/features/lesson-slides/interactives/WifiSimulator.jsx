@@ -62,7 +62,7 @@ export const WifiSimulator = ({ onComplete, onPrevious, canGoPrevious, isComplet
 	const isSuccess = feedback === "success" || feedback === "warning";
 
 	return (
-		<div className="flex flex-col w-full max-w-4xl mx-auto items-center">
+		<div className="flex flex-col w-full max-w-4xl mx-auto items-center h-full">
 			<div className="w-full max-w-md md:max-w-lg bg-gray-900 border-4 border-gray-700 rounded-3xl overflow-hidden shadow-2xl relative mx-auto my-8">
 				{/* Phone Header */}
 				<div className="bg-gray-800 p-4 flex justify-between items-center text-sm text-gray-400">

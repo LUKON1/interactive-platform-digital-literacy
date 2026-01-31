@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowLeft, Lightbulb, Zap } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { LessonNavigation } from "./LessonNavigation";
 
 export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 	// Utility to remove common indent ation/newlines to fix markdown rendering
@@ -58,28 +59,13 @@ export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 			</div>
 
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center pt-8 sm:pt-10 gap-4 sm:gap-6 mt-4">
-				{canGoPrevious ? (
-					<motion.button
-						whileHover={{ scale: 1.02, x: -3 }}
-						whileTap={{ scale: 0.98 }}
-						onClick={onPrevious}
-						className="btn-ghost flex items-center text-sm sm:text-base font-medium text-text-muted hover:text-text-primary px-4 py-3 transition-colors motion-safe">
-						<ArrowLeft size={18} className="mr-2" />
-						Назад
-					</motion.button>
-				) : (
-					<div />
-				)}
-
-				<motion.button
-					whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
-					whileTap={{ scale: 0.95 }}
-					onClick={onNext}
-					className="btn-primary flex items-center text-sm sm:text-base md:text-lg font-bold px-6 py-3 sm:px-10 sm:py-4 rounded-xl shadow-lg shadow-primary/20 motion-safe">
-					Продолжить <ArrowRight size={18} className="ml-2" />
-				</motion.button>
-			</div>
+			<LessonNavigation
+				onPrevious={onPrevious}
+				onNext={onNext}
+				canGoPrevious={canGoPrevious}
+				nextLabel="Продолжить"
+				isCompleted={true}
+			/>
 		</div>
 	);
 };

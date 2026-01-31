@@ -154,7 +154,7 @@ export const TermSorter = ({
 	const allSorted = items.length === 0;
 
 	return (
-		<div className="w-full max-w-4xl mx-auto">
+		<div className="w-full max-w-4xl mx-auto flex flex-col h-full">
 			<DndContext
 				onDragStart={handleDragStart}
 				onDragEnd={handleDragEnd}

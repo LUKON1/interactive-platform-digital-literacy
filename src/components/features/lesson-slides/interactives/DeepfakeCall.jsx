@@ -64,7 +64,7 @@ export const DeepfakeCall = ({ data, onComplete, onPrevious, canGoPrevious, isCo
 	const currentDialogue = scenario[0]; // Simplified for now
 
 	return (
-		<div className="flex flex-col items-center w-full max-w-lg mx-auto min-h-full">
+		<div className="flex flex-col items-center w-full max-w-lg mx-auto h-full">
 			<div className="w-full max-w-sm mx-auto h-162.5 flex flex-col bg-black rounded-[3rem] overflow-hidden shadow-2xl relative border-8 border-gray-800 shrink-0 mb-6">
 				{/* Status Bar (Simulated Mobile) */}
 				<div className="absolute top-0 w-full z-20 px-6 py-4 flex justify-between text-white font-medium text-sm">

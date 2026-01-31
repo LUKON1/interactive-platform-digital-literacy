@@ -65,7 +65,7 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 	}
 
 	return (
-		<div className="w-full max-w-lg mx-auto">
+		<div className="w-full max-w-lg mx-auto flex flex-col h-full">
 			<div className="surface-card p-8 text-center mb-8">
 				<motion.div
 					className={`w-24 h-24 mx-auto mb-6 rounded-full bg-bg-surface-3 flex items-center justify-center ${color} transition-colors duration-500`}

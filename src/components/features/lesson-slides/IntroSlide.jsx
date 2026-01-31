@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { LessonNavigation } from "./LessonNavigation";
 
 export const IntroSlide = ({ slide, onNext, onPrevious, onClose, canGoPrevious }) => {
 	const cleanContent = slide.content
@@ -54,31 +55,14 @@ export const IntroSlide = ({ slide, onNext, onPrevious, onClose, canGoPrevious }
 			</div>
 
 			{/* Navigation Buttons */}
-			<div className="w-full flex justify-between items-center pt-8 sm:pt-10 gap-4 sm:gap-6 border-t border-bg-surface-3/50 mt-4">
-				<motion.button
-					whileHover={{ scale: 1.02, x: -3 }}
-					whileTap={{ scale: 0.98 }}
-					onClick={canGoPrevious ? onPrevious : onClose}
-					className="btn-ghost flex items-center text-sm sm:text-base font-medium text-text-muted hover:text-text-primary px-4 py-3 transition-colors motion-safe">
-					<ArrowLeft size={18} className="mr-2" />
-					{canGoPrevious ? "Назад" : "Выход"}
-				</motion.button>
-
-				<motion.button
-					whileHover={{
-						scale: 1.05,
-						boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-					}}
-					whileTap={{ scale: 0.95 }}
-					onClick={onNext}
-					className="group relative btn-primary flex items-center text-base sm:text-lg md:text-xl font-bold px-8 py-4 sm:px-10 sm:py-5 rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all overflow-hidden motion-safe">
-					<span className="relative z-10 flex items-center">
-						Поехали!{" "}
-						<ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-					</span>
-					<div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-				</motion.button>
-			</div>
+			<LessonNavigation
+				onPrevious={onClose}
+				onNext={onNext}
+				canGoPrevious={true}
+				nextLabel="Поехали!"
+				nextIcon={ArrowRight}
+				isCompleted={true}
+			/>
 		</div>
 	);
 };

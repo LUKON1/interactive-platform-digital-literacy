@@ -84,7 +84,7 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 	};
 
 	return (
-		<div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 pt-28 lg:pt-0">
+		<div className="w-full max-w-5xl mx-auto flex flex-col h-full lg:flex-row gap-6 pt-28 lg:pt-0">
 			{/* Email Display */}
 			<div className="flex-1 surface-card p-6">
 				<div className="flex items-center gap-3 mb-6 pb-4 border-b border-bg-surface-3">

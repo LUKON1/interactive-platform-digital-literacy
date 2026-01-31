@@ -50,7 +50,7 @@ export const TOPICS = [
 		description: "Как отличить ИИ от человека.",
 		icon: "UserX",
 		theme: "tertiary",
-		totalLessons: 1,
+		totalLessons: 2,
 		difficulty: "hard",
 	},
 ];
