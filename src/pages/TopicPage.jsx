@@ -23,7 +23,10 @@ export const TopicPage = () => {
 				<ArrowLeft size={20} className="mr-2" /> Назад в Хаб
 			</button>
 
-			<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				className="motion-safe">
 				<div className="flex items-center gap-4 mb-6">
 					<div className="p-4 rounded-3xl bg-bg-surface-2 text-primary inline-block">
 						{/* Dynamic Icon render could be improved here, currently just text/placeholder if strictly needed */}
@@ -54,7 +57,7 @@ export const TopicPage = () => {
 								transition={{ delay: index * 0.1 }}
 								onClick={() => !actuallyLocked && navigate(`/topic/${id}/lesson/${lesson.id}`)}
 								className={`
-                  p-6 rounded-[24px] border flex items-center justify-between group transition-all
+                  p-6 rounded-[24px] border flex items-center justify-between group transition-all motion-safe
                   ${
 										actuallyLocked
 											? "border-bg-surface-3 bg-bg-surface-1 opacity-60 cursor-not-allowed"

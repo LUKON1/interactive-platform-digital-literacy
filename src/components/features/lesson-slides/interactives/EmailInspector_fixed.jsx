@@ -157,7 +157,7 @@ export const EmailInspector = ({ onComplete, data }) => {
 					</div>
 					<div className="h-2 bg-bg-surface-3 rounded-full overflow-hidden">
 						<motion.div
-							className="h-full bg-linear-to-r from-error via-warning to-success"
+							className="h-full bg-linear-to-r from-error via-warning to-success motion-safe"
 							initial={{ width: 0 }}
 							animate={{ width: `${(foundFlags.length / redFlags.length) * 100}%` }}
 						/>
@@ -179,7 +179,7 @@ export const EmailInspector = ({ onComplete, data }) => {
 									key={flag.id}
 									initial={{ opacity: 0.5 }}
 									animate={{ opacity: isFound ? 1 : 0.5 }}
-									className={`p-2 sm:p-3 rounded-lg border-2 cursor-pointer transition-all ${
+									className={`p-2 sm:p-3 rounded-lg border-2 cursor-pointer transition-all motion-safe ${
 										isFound
 											? "border-success bg-success/10 text-success"
 											: "border-bg-surface-3 bg-bg-surface-2 text-text-muted"
@@ -210,7 +210,7 @@ export const EmailInspector = ({ onComplete, data }) => {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						onClick={onComplete}
-						className="btn-primary w-full py-3 sm:py-4 bg-success hover:bg-success/90 text-sm sm:text-base">
+						className="btn-primary w-full py-3 sm:py-4 bg-success hover:bg-success/90 text-sm sm:text-base motion-safe">
 						<CheckCircle size={18} className="mr-2 sm:w-5 sm:h-5" />
 						Все угрозы найдены!
 					</motion.button>
@@ -224,13 +224,13 @@ export const EmailInspector = ({ onComplete, data }) => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+						className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 motion-safe"
 						onClick={() => setSelectedFlag(null)}>
 						<motion.div
 							initial={{ scale: 0.9, y: 20 }}
 							animate={{ scale: 1, y: 0 }}
 							exit={{ scale: 0.9, y: 20 }}
-							className="surface-card max-w-lg w-full p-4 sm:p-6"
+							className="surface-card max-w-lg w-full p-4 sm:p-6 motion-safe"
 							onClick={(e) => e.stopPropagation()}>
 							<div className="flex items-start justify-between mb-3 sm:mb-4">
 								<div className="flex items-center gap-2 sm:gap-3">

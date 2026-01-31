@@ -21,7 +21,7 @@ const ChatMessage = ({ msg }) => {
 			<motion.div
 				initial={{ opacity: 0, scale: 0.9 }}
 				animate={{ opacity: 1, scale: 1 }}
-				className="flex justify-center my-2">
+				className="flex justify-center my-2 motion-safe">
 				<div className="bg-bg-surface-3/50 text-text-secondary px-3 py-1.5 rounded-xl text-xs">
 					{msg.text}
 				</div>
@@ -33,7 +33,7 @@ const ChatMessage = ({ msg }) => {
 		<motion.div
 			initial={{ opacity: 0, y: 10, scale: 0.95 }}
 			animate={{ opacity: 1, y: 0, scale: 1 }}
-			className={`flex w-full mb-2 sm:mb-3 ${isMe ? "justify-end" : "justify-start"}`}>
+			className={`flex w-full mb-2 sm:mb-3 motion-safe ${isMe ? "justify-end" : "justify-start"}`}>
 			<div
 				className={`
 					max-w-[85%] sm:max-w-[75%] px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-sm sm:text-base leading-relaxed shadow-sm text-left
@@ -347,13 +347,13 @@ export const ChatSimulation = ({ onComplete, onPrevious, canGoPrevious, isComple
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+						className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 motion-safe"
 						onClick={() => setShowExplanation(false)}>
 						<motion.div
 							initial={{ scale: 0.9, y: 20 }}
 							animate={{ scale: 1, y: 0 }}
 							exit={{ scale: 0.9, y: 20 }}
-							className="surface-card max-w-lg w-full p-4 sm:p-6 max-h-[80vh] overflow-y-auto shadow-2xl relative"
+							className="surface-card max-w-lg w-full p-4 sm:p-6 max-h-[80vh] overflow-y-auto shadow-2xl relative motion-safe"
 							onClick={(e) => e.stopPropagation()}>
 							<button
 								onClick={() => setShowExplanation(false)}

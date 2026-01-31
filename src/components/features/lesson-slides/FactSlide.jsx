@@ -19,7 +19,7 @@ export const FactSlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 				<motion.div
 					initial={{ scale: 0.9, opacity: 0 }}
 					animate={{ scale: 1, opacity: 1 }}
-					className="surface-card p-6 sm:p-8 md:p-10 border-2 border-primary/20 relative overflow-hidden w-full max-w-2xl">
+					className="surface-card p-6 sm:p-8 md:p-10 border-2 border-primary/20 relative overflow-hidden w-full max-w-2xl motion-safe">
 					{/* Background Sparkles */}
 					<div className="absolute top-0 right-0 w-64 h-64 bg-primary opacity-10 blur-[80px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 

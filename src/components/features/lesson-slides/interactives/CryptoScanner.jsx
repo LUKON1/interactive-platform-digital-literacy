@@ -90,7 +90,7 @@ export const CryptoScanner = ({ onComplete }) => {
 					<motion.div
 						initial={{ opacity: 0, height: 0 }}
 						animate={{ opacity: 1, height: "auto" }}
-						className="mt-6 p-4 bg-emerald-500 text-white rounded-lg text-sm font-bold text-center">
+						className="mt-6 p-4 bg-emerald-500 text-white rounded-lg text-sm font-bold text-center motion-safe">
 						Правильно! Всегда проверяй адрес контракта и количество холдеров.
 					</motion.div>
 				)}
@@ -99,7 +99,7 @@ export const CryptoScanner = ({ onComplete }) => {
 					<motion.div
 						initial={{ opacity: 0, height: 0 }}
 						animate={{ opacity: 1, height: "auto" }}
-						className="mt-6 p-4 bg-red-500 text-white rounded-lg text-sm font-bold text-center">
+						className="mt-6 p-4 bg-red-500 text-white rounded-lg text-sm font-bold text-center motion-safe">
 						Осторожно! Это скам-токен. Адрес подозрительный, мало держателей.
 					</motion.div>
 				)}

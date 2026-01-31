@@ -63,7 +63,7 @@ export const TotpSimulator = ({ onComplete, onPrevious, canGoPrevious, isComplet
 					<motion.div
 						initial={{ opacity: 0, scale: 0.9 }}
 						animate={{ opacity: 1, scale: 1 }}
-						className="flex flex-col items-center justify-center p-8 text-center bg-gray-900/50 rounded-3xl border border-bg-surface-3 backdrop-blur-sm">
+						className="flex flex-col items-center justify-center p-8 text-center bg-gray-900/50 rounded-3xl border border-bg-surface-3 backdrop-blur-sm motion-safe">
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1, rotate: 360 }}
@@ -83,7 +83,7 @@ export const TotpSimulator = ({ onComplete, onPrevious, canGoPrevious, isComplet
 						<motion.div
 							initial={{ y: 20, opacity: 0 }}
 							animate={{ y: 0, opacity: 1 }}
-							className="w-72 bg-black rounded-[3rem] p-4 border-4 border-gray-800 shadow-2xl relative">
+							className="w-72 bg-black rounded-[3rem] p-4 border-4 border-gray-800 shadow-2xl relative motion-safe">
 							{/* Notch */}
 							<div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-10" />
 

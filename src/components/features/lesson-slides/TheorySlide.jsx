@@ -16,7 +16,7 @@ export const TheorySlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 			<motion.h2
 				initial={{ x: -20, opacity: 0 }}
 				animate={{ x: 0, opacity: 1 }}
-				className="text-2xl sm:text-3xl font-bold text-text-primary mb-4 sm:mb-6 md:mb-8">
+				className="text-2xl sm:text-3xl font-bold text-text-primary mb-4 sm:mb-6 md:mb-8 motion-safe">
 				{slide.title}
 			</motion.h2>
 
@@ -24,7 +24,7 @@ export const TheorySlide = ({ slide, onNext, onPrevious, canGoPrevious }) => {
 				initial={{ y: 20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ delay: 0.2 }}
-				className="surface-card p-4 sm:p-6 md:p-8 text-base sm:text-lg text-text-secondary leading-relaxed sm:leading-loose text-left flex-1">
+				className="surface-card p-4 sm:p-6 md:p-8 text-base sm:text-lg text-text-secondary leading-relaxed sm:leading-loose text-left flex-1 motion-safe">
 				<ReactMarkdown
 					components={{
 						p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,

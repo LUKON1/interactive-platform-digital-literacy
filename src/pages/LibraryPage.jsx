@@ -14,7 +14,7 @@ export const LibraryPage = () => {
 			<motion.header
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="mb-12 text-center">
+				className="mb-12 text-center motion-safe">
 				<div className="inline-block px-4 py-1.5 rounded-full bg-bg-surface-2 text-primary text-sm font-medium mb-4 border border-bg-surface-3">
 					Digital Literacy Platform v1.0
 				</div>
@@ -30,7 +30,7 @@ export const LibraryPage = () => {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2 }}
-				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 motion-safe">
 				{TOPICS.map((topic, index) => {
 					// Quick calculation or from store.
 					// For now, we will assume the store has a helper or we calculate it here.
@@ -55,7 +55,8 @@ export const LibraryPage = () => {
 							key={topic.id}
 							initial={{ opacity: 0, scale: 0.9 }}
 							animate={{ opacity: 1, scale: 1 }}
-							transition={{ delay: 0.1 * index + 0.3 }}>
+							transition={{ delay: 0.1 * index + 0.3 }}
+							className="motion-safe">
 							<TopicCardConnected topic={topic} onClick={() => navigate(`/topic/${topic.id}`)} />
 						</motion.div>
 					);

@@ -19,7 +19,7 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 				initial={{ scale: 0, rotate: -180 }}
 				animate={{ scale: 1, rotate: 0 }}
 				transition={{ type: "spring", damping: 12 }}
-				className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-success text-bg-base flex items-center justify-center mb-4 sm:mb-6 md:mb-8 shrink-0">
+				className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-success text-bg-base flex items-center justify-center mb-4 sm:mb-6 md:mb-8 shrink-0 motion-safe">
 				<CheckCircle className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16" />
 			</motion.div>
 
@@ -27,7 +27,7 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.3 }}
-				className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-3 sm:mb-4 px-2">
+				className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-3 sm:mb-4 px-2 motion-safe">
 				{slide.title}
 			</motion.h1>
 
@@ -35,7 +35,7 @@ export const OuttroSlide = ({ slide, lessonId, topicId, onComplete }) => {
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.5 }}
-				className="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mb-6 sm:mb-8 md:mb-12 w-full px-2">
+				className="text-base sm:text-lg md:text-xl text-text-secondary max-w-3xl mb-6 sm:mb-8 md:mb-12 w-full px-2 motion-safe">
 				<ReactMarkdown
 					components={{
 						h2: ({ ...props }) => (

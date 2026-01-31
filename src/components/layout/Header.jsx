@@ -22,7 +22,7 @@ export const Header = () => {
 		<motion.header
 			initial={{ y: -20, opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
-			className="sticky top-0 z-40 w-full backdrop-blur-lg bg-bg-base/80 border-b border-bg-surface-3">
+			className="sticky top-0 z-40 w-full backdrop-blur-lg bg-bg-base/80 border-b border-bg-surface-3 motion-safe">
 			<div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 				{/* Logo */}
 				<Link to="/" className="flex items-center gap-3 group z-50 relative">
@@ -80,7 +80,7 @@ export const Header = () => {
 						animate={{ opacity: 1, height: "auto" }}
 						exit={{ opacity: 0, height: 0 }}
 						transition={{ duration: 0.3, ease: "easeInOut" }}
-						className="md:hidden border-t border-bg-surface-3 bg-bg-base/95 backdrop-blur-xl overflow-hidden">
+						className="md:hidden border-t border-bg-surface-3 bg-bg-base/95 backdrop-blur-xl overflow-hidden motion-safe">
 						<nav className="flex flex-col p-6 gap-4">
 							{navLinks.map((link, i) => (
 								<motion.div

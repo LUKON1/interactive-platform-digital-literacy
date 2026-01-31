@@ -19,7 +19,7 @@ export const LessonLayout = ({ children, title, progress, onClose }) => {
 				{/* Progress Bar */}
 				<div className="flex-1 max-w-md mx-6 h-2 bg-bg-surface-3 rounded-full overflow-hidden">
 					<motion.div
-						className="h-full bg-primary"
+						className="h-full bg-primary motion-safe"
 						initial={{ width: 0 }}
 						animate={{ width: `${progress}%` }}
 						transition={{ duration: 0.5, ease: "easeInOut" }}

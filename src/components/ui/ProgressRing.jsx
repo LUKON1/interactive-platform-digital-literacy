@@ -29,7 +29,7 @@ export const ProgressRing = ({
 				/>
 				{/* Progress Circle */}
 				<motion.circle
-					className={clsx("transition-colors duration-500", color)}
+					className={clsx("transition-colors duration-500 motion-safe", color)}
 					strokeWidth={strokeWidth}
 					strokeDasharray={circumference}
 					strokeDashoffset={offset}

@@ -53,7 +53,7 @@ export const SkillTreePage = () => {
 			<motion.div
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="pt-12 pb-8 text-center px-6">
+				className="pt-12 pb-8 text-center px-6 motion-safe">
 				<div className="inline-block px-4 py-1.5 rounded-full bg-bg-surface-2 text-primary text-sm font-medium mb-4 border border-bg-surface-3">
 					Digital Literacy Platform v1.0
 				</div>
