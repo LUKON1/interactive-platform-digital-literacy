@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle, XCircle, AlertCircle, Video, Mic, FileText } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { InteractiveNavigation } from "./InteractiveNavigation";
 
 // Quiz questions
@@ -24,6 +25,7 @@ const QUIZ_QUESTIONS = [
 		type: "audio",
 		scenario:
 			"Тебе звонит 'твой руководитель' и просит срочно перевести деньги на новый счёт. Голос похож, но звук слегка роботизированный.",
+		audioSrc: "/assets/deepfakeceovice.m4a",
 		hints: [
 			"Необычное качество звука",
 			"Срочность — типичная тактика мошенников",
@@ -50,8 +52,29 @@ const QUIZ_QUESTIONS = [
 	{
 		id: 4,
 		type: "text",
-		scenario:
-			"Email от 'банка' с просьбой подтвердить личность. Текст идеальный, без ошибок, но адрес отправителя: support@sberbank-security.net вместо sberbank.ru",
+		scenario: `
+**От кого:** Служба безопасности ПАО Сбербанк <support@sberbank-security.net>  
+**Тема:** Срочное уведомление: Ваш доступ к онлайн-банку может быть ограничен
+
+Уважаемый клиент!
+
+Доводим до вашего сведения, что в рамках обновления протоколов безопасности и в соответствии с требованиями Федерального закона №115-ФЗ, всем пользователям необходимо пройти обязательную процедуру подтверждения личности и актуализации персональных данных.
+
+**Почему это важно?**  
+В последнее время участились случаи несанкционированного доступа к личным кабинетам. Обновление ваших данных позволит нам активировать дополнительный уровень защиты и предотвратить возможные мошеннические операции по вашим счетам.
+
+**Что вам нужно сделать?**  
+Для завершения процедуры идентификации, пожалуйста, перейдите на нашу защищенную страницу верификации и следуйте инструкциям:
+
+[ПОДТВЕРДИТЬ ЛИЧНОСТЬ](https://sberbank-security.net)
+
+**Внимание:** Если процедура подтверждения не будет пройдена в течение 24 часов, мы будем вынуждены временно приостановить действие вашей банковской карты и доступ к мобильному приложению в целях обеспечения сохранности ваших средств.
+
+Благодарим за понимание и сотрудничество.
+
+С уважением,  
+Команда безопасности ПАО Сбербанк.
+`,
 		hints: [
 			"Поддельный домен (.net вместо .ru)",
 			"Просьба подтвердить личность — признак фишинга",
@@ -157,8 +180,37 @@ export const MediaVerificationQuiz = ({ onComplete, onPrevious, canGoPrevious, i
 								</div>
 
 								{/* Scenario */}
-								<div className="flex-1 mb-6">
-									<p className="text-lg leading-relaxed text-text-primary">{question.scenario}</p>
+								<div className="flex-1 mb-6 overflow-y-auto custom-scrollbar">
+									<div className="text-lg leading-relaxed text-text-primary prose prose-invert prose-p:mb-4 prose-strong:text-primary prose-a:text-blue-400">
+										<ReactMarkdown
+											components={{
+												p: ({ node, ...props }) => <p className="mb-4 last:mb-0" {...props} />,
+												a: ({ node, ...props }) => (
+													<span className="text-blue-400 underline cursor-not-allowed" {...props} />
+												),
+											}}>
+											{question.scenario}
+										</ReactMarkdown>
+									</div>
+
+									{/* Audio Player */}
+									{question.audioSrc && (
+										<div className="mt-4 p-4 rounded-xl bg-bg-surface-1 border border-bg-surface-3">
+											<div className="flex items-center gap-3 mb-2">
+												<div className="p-2 rounded-full bg-primary/10">
+													<Mic size={20} className="text-primary" />
+												</div>
+												<span className="text-sm font-bold text-text-secondary">
+													Прослушайте запись:
+												</span>
+											</div>
+											<audio controls className="w-full h-10 accent-primary">
+												<source src={question.audioSrc} type="audio/mp4" />
+												<source src={question.audioSrc} type="audio/mpeg" />
+												Ваш браузер не поддерживает аудио элемент.
+											</audio>
+										</div>
+									)}
 								</div>
 
 								{/* Hints */}
@@ -213,9 +265,16 @@ export const MediaVerificationQuiz = ({ onComplete, onPrevious, canGoPrevious, i
 														className={`font-bold text-lg mb-2 ${answers[currentQuestion] ? "text-success" : "text-error"}`}>
 														{answers[currentQuestion] ? "Правильно!" : "Неправильно"}
 													</h4>
-													<p className="text-text-secondary text-sm leading-relaxed">
-														{question.explanation}
-													</p>
+													<div className="text-text-secondary text-sm leading-relaxed">
+														<ReactMarkdown
+															components={{
+																strong: ({ node, ...props }) => (
+																	<span className="font-bold text-text-primary" {...props} />
+																),
+															}}>
+															{question.explanation}
+														</ReactMarkdown>
+													</div>
 												</div>
 											</div>
 											<button

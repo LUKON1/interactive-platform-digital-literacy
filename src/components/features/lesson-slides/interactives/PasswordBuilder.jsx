@@ -48,7 +48,7 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 		setCheckResult({ time });
 	};
 
-	// If 'onComplete' is called, it means user is done reading the result
+	// If 'onComplete' is ed, it means user is done reading the result
 	const handleNext = () => {
 		onComplete();
 	};

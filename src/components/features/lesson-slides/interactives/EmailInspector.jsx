@@ -156,7 +156,7 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 					</div>
 					<div className="h-2 bg-bg-surface-3 rounded-full overflow-hidden">
 						<motion.div
-							className="h-full bg-linear-to-r from-error via-warning to-success"
+							className="motion-safe h-full bg-linear-to-r from-error via-warning to-success"
 							initial={{ width: 0 }}
 							animate={{ width: `${(foundFlags.length / redFlags.length) * 100}%` }}
 						/>
@@ -178,7 +178,7 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 									key={flag.id}
 									initial={{ opacity: 0.5 }}
 									animate={{ opacity: isFound ? 1 : 0.5 }}
-									className={`p-3 rounded-lg border-2 cursor-pointer transition-all ${
+									className={`motion-safe p-3 rounded-lg border-2 cursor-pointer transition-all ${
 										isFound
 											? "border-success bg-success/10 text-success"
 											: "border-bg-surface-3 bg-bg-surface-2 text-text-muted"

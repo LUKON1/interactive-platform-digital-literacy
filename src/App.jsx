@@ -16,13 +16,18 @@ const LessonPage = lazy(() =>
 );
 
 import { MainLayout } from "./components/layout/MainLayout";
+import { Loader } from "./components/ui/Loader";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<MainLayout>
 				<Suspense
-					fallback={<div className="flex items-center justify-center h-screen">Загрузка...</div>}>
+					fallback={
+						<div className="flex items-center justify-center h-screen">
+							<Loader />
+						</div>
+					}>
 					<Routes>
 						<Route path="/" element={<SkillTreePage />} />
 						<Route path="/library" element={<LibraryPage />} />
