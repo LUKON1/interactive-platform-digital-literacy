@@ -38,7 +38,7 @@ export const Header = () => {
 						<Link
 							key={link.path}
 							to={link.path}
-							className={`text-sm font-medium transition-colors ${
+							className={`text-lg font-medium transition-colors ${
 								location.pathname === link.path
 									? "text-primary"
 									: "text-text-primary hover:text-primary"

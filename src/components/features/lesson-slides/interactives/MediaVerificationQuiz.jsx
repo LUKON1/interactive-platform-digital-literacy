@@ -11,6 +11,7 @@ const QUIZ_QUESTIONS = [
 		type: "video",
 		scenario:
 			"Политик в прямом эфире делает заявление о новом законе. Видео опубликовано на официальном канале новостей.",
+		videoSrc: "/assets/antideepfakepolitic.mp4",
 		hints: [
 			"Опубликовано проверенным источником",
 			"Прямой эфир сложнее подделать",
@@ -40,6 +41,7 @@ const QUIZ_QUESTIONS = [
 		type: "video",
 		scenario:
 			"Видео со знаменитостью, где она рекламирует криптовалюту. Опубликовано на странице в VK с 5000 подписчиков, создана неделю назад.",
+		videoSrc: "/assets/Russian_Business_Man_Video.mp4",
 		hints: [
 			"Неофициальная страница",
 			"Малое количество подписчиков",
@@ -89,6 +91,7 @@ const QUIZ_QUESTIONS = [
 		type: "audio",
 		scenario:
 			"Аудиозапись интервью с журналистом на радио. В прямом эфире обсуждаются актуальные новости. Звук чистый, журналист задаёт уточняющие вопросы.",
+		audioSrc: "/assets/podcast.m4a",
 		hints: ["Прямой эфир", "Естественный диалог с импровизацией", "Чистый звук без артефактов"],
 		isReal: true,
 		explanation:
@@ -192,6 +195,16 @@ export const MediaVerificationQuiz = ({ onComplete, onPrevious, canGoPrevious, i
 											{question.scenario}
 										</ReactMarkdown>
 									</div>
+
+									{/* Video Player */}
+									{question.videoSrc && (
+										<div className="mt-4 rounded-xl overflow-hidden bg-bg-surface-1 border border-bg-surface-3">
+											<video controls className="w-full aspect-video">
+												<source src={question.videoSrc} type="video/mp4" />
+												Ваш браузер не поддерживает видео элемент.
+											</video>
+										</div>
+									)}
 
 									{/* Audio Player */}
 									{question.audioSrc && (

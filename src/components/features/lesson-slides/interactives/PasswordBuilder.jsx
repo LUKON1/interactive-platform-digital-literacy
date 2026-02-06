@@ -28,7 +28,7 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 	};
 
 	const strength = calculateStrength(password);
-	const isComplete = strength === 100;
+	const isComplete = strength >= 80;
 
 	// Simple crack time estimation (Mock for educational purposes)
 	const getCrackTime = (score) => {
@@ -112,6 +112,13 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 						className="mt-6 p-4 bg-bg-surface-2 rounded-xl border border-primary/20">
 						<div className="text-sm text-text-secondary mb-1">Время на взлом (Брутфорс):</div>
 						<div className="text-2xl font-bold text-primary">{checkResult.time}</div>
+						{!isComplete && (
+							<button
+								onClick={() => setCheckResult(null)}
+								className="w-full mt-4 py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary/10 transition-colors cursor-pointer">
+								Попробовать еще раз
+							</button>
+						)}
 					</motion.div>
 				)}
 			</div>
@@ -119,9 +126,13 @@ export const PasswordBuilder = ({ onComplete, onPrevious, canGoPrevious, isCompl
 			{!checkResult && (
 				<button
 					onClick={handleCheck}
-					disabled={!isComplete}
+					disabled={password.length === 0}
 					className={`btn-primary w-full py-4 text-lg font-bold transition-all ${
-						!isComplete ? "opacity-50 cursor-not-allowed grayscale" : "animate-pulse"
+						password.length === 0
+							? "opacity-50 cursor-not-allowed grayscale"
+							: isComplete
+								? "animate-pulse"
+								: ""
 					}`}>
 					Проверить защиту
 				</button>
