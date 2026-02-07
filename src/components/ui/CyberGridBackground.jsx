@@ -4,22 +4,49 @@ export const CyberGridBackground = () => {
 	const containerRef = useRef(null);
 
 	useEffect(() => {
-		let rafId;
-		const handleMouseMove = (e) => {
-			if (rafId) return;
-			rafId = requestAnimationFrame(() => {
-				if (!containerRef.current) return;
-				const x = e.clientX;
-				const y = e.clientY;
-				containerRef.current.style.setProperty("--mouse-x", `${x}px`);
-				containerRef.current.style.setProperty("--mouse-y", `${y}px`);
-				rafId = null;
-			});
-		};
+		const container = containerRef.current;
+		if (!container) return;
 
-		window.addEventListener("mousemove", handleMouseMove);
+		let rafId;
+		// Check if device has coarse pointer (touch)
+		const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+		if (isTouchDevice) {
+			// Auto-animation for mobile
+			let angle = 0;
+			const animate = () => {
+				if (!container) return;
+				angle += 0.005; // speed
+				// Move in a figure-8 or circle
+				const x = 50 + Math.cos(angle) * 30; // 20% to 80% width
+				const y = 50 + Math.sin(angle * 1.5) * 30; // 20% to 80% height
+
+				container.style.setProperty("--mouse-x", `${x}%`);
+				container.style.setProperty("--mouse-y", `${y}%`);
+				rafId = requestAnimationFrame(animate);
+			};
+			animate();
+		} else {
+			// Mouse interaction for desktop
+			const handleMouseMove = (e) => {
+				if (rafId) return;
+				rafId = requestAnimationFrame(() => {
+					if (!container) return;
+					const x = e.clientX;
+					const y = e.clientY;
+					container.style.setProperty("--mouse-x", `${x}px`);
+					container.style.setProperty("--mouse-y", `${y}px`);
+					rafId = null;
+				});
+			};
+			window.addEventListener("mousemove", handleMouseMove);
+			return () => {
+				window.removeEventListener("mousemove", handleMouseMove);
+				if (rafId) cancelAnimationFrame(rafId);
+			};
+		}
+
 		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
 			if (rafId) cancelAnimationFrame(rafId);
 		};
 	}, []);

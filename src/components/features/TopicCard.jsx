@@ -23,9 +23,9 @@ export const TopicCard = ({ topic, progress = 0, onClick }) => {
 				<div
 					className={`
                     absolute bottom-4 right-4 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md border
-                    ${topic.difficulty === "easy" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : ""}
-                    ${topic.difficulty === "medium" ? "bg-amber-500/10 text-amber-400 border-amber-500/20" : ""}
-                    ${topic.difficulty === "hard" ? "bg-rose-500/10 text-rose-400 border-rose-500/20" : ""}
+                    ${topic.difficulty === "easy" ? "bg-success/10 text-success border-success/20" : ""}
+                    ${topic.difficulty === "medium" ? "bg-warning/10 text-warning border-warning/20" : ""}
+                    ${topic.difficulty === "hard" ? "bg-error/10 text-error border-error/20" : ""}
                 `}>
 					{topic.difficulty}
 				</div>

@@ -260,37 +260,41 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 			</AnimatePresence>
 
 			{/* Custom styles for highlights */}
-			<style jsx>{`
-				:global(.urgency-highlight) {
-					background-color: rgba(var(--color-warning-rgb, 255, 193, 7), 0.3);
+			{/* Custom styles for highlights */}
+			<style>{`
+				.urgency-highlight {
+					background-color: transparent;
+					color: inherit;
 					padding: 2px 4px;
 					border-radius: 4px;
 					cursor: pointer;
 					transition: background-color 0.2s;
 				}
-				:global(.urgency-highlight:hover) {
-					background-color: rgba(var(--color-warning-rgb, 255, 193, 7), 0.5);
+				.urgency-highlight:hover {
+					background-color: rgba(var(--color-warning-rgb, 255, 193, 7), 0.1);
 				}
-				:global(.link-highlight) {
-					background-color: rgba(var(--color-error-rgb, 244, 67, 54), 0.3);
+				.link-highlight {
+					background-color: transparent;
+					color: inherit;
 					padding: 2px 4px;
 					border-radius: 4px;
 					cursor: pointer;
 					transition: background-color 0.2s;
 					text-decoration: underline;
 				}
-				:global(.link-highlight:hover) {
-					background-color: rgba(var(--color-error-rgb, 244, 67, 54), 0.5);
+				.link-highlight:hover {
+					background-color: rgba(var(--color-error-rgb, 244, 67, 54), 0.1);
 				}
-				:global(.grammar-highlight) {
-					background-color: rgba(var(--color-info-rgb, 33, 150, 243), 0.3);
+				.grammar-highlight {
+					background-color: transparent;
+					color: inherit;
 					padding: 2px 4px;
 					border-radius: 4px;
 					cursor: pointer;
 					transition: background-color 0.2s;
 				}
-				:global(.grammar-highlight:hover) {
-					background-color: rgba(var(--color-info-rgb, 33, 150, 243), 0.5);
+				.grammar-highlight:hover {
+					background-color: rgba(var(--color-info-rgb, 33, 150, 243), 0.1);
 				}
 			`}</style>
 		</div>

@@ -24,8 +24,14 @@
 
 	/* Status Colors */
 	--color-success: #b3eebb; /* Soft Emerald */
+	--color-success-rgb: 179, 238, 187;
 	--color-error: #f2b8b5; /* Soft Red */
+	--color-error-rgb: 242, 184, 181;
 	--color-warning: #f9d8a6; /* Soft Amber */
+	--color-warning-rgb: 249, 216, 166;
+	--color-info: #a6c8ff; /* Soft Blue */
+	--color-info-rgb: 166, 200, 255;
+	--color-on-info: #003063;
 
 	/* Fonts */
 	--font-display: "Outfit", sans-serif;

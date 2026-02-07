@@ -14,13 +14,21 @@ const TopicPage = lazy(() =>
 const LessonPage = lazy(() =>
 	import("./pages/LessonPage").then((module) => ({ default: module.LessonPage })),
 );
+const InProgressPage = lazy(() =>
+	import("./pages/InProgressPage").then((module) => ({ default: module.InProgressPage })),
+);
+const AboutPage = lazy(() =>
+	import("./pages/AboutPage").then((module) => ({ default: module.AboutPage })),
+);
 
 import { MainLayout } from "./components/layout/MainLayout";
 import { Loader } from "./components/ui/Loader";
+import { XpNotification } from "./components/features/gamification/XpNotification";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<XpNotification />
 			<MainLayout>
 				<Suspense
 					fallback={
@@ -33,6 +41,8 @@ function App() {
 						<Route path="/library" element={<LibraryPage />} />
 						<Route path="/topic/:id" element={<TopicPage />} />
 						<Route path="/topic/:id/lesson/:lessonId" element={<LessonPage />} />
+						<Route path="/progress" element={<InProgressPage />} />
+						<Route path="/about" element={<AboutPage />} />
 						<Route path="*" element={<Navigate to="/" replace />} />
 					</Routes>
 				</Suspense>

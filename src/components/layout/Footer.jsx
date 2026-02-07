@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export const Footer = () => {
 	const location = useLocation();
@@ -25,19 +25,19 @@ export const Footer = () => {
 					</h4>
 					<ul className="space-y-2 text-sm text-text-secondary">
 						<li>
-							<a href="#" className="hover:text-primary transition-colors">
+							<Link to="/progress" className="hover:text-primary transition-colors">
 								Все курсы
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href="#" className="hover:text-primary transition-colors">
+							<Link to="/progress" className="hover:text-primary transition-colors">
 								Рейтинг
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href="#" className="hover:text-primary transition-colors">
+							<Link to="/progress" className="hover:text-primary transition-colors">
 								Для учителей
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>
@@ -57,12 +57,12 @@ export const Footer = () => {
 			<div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-bg-surface-3 flex flex-col md:flex-row justify-between items-center text-sm text-text-muted">
 				<p>© {year} Cyber Academy. Все права защищены.</p>
 				<div className="flex gap-6 mt-4 md:mt-0">
-					<a href="#" className="hover:text-text-primary">
+					<Link to="/progress" className="hover:text-text-primary">
 						Политика конфиденциальности
-					</a>
-					<a href="#" className="hover:text-text-primary">
+					</Link>
+					<Link to="/progress" className="hover:text-text-primary">
 						Условия использования
-					</a>
+					</Link>
 				</div>
 			</div>
 		</footer>

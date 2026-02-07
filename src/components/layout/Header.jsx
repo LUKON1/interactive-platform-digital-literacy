@@ -6,7 +6,7 @@ import { useProgressStore } from "../../store/useProgressStore";
 
 export const Header = () => {
 	const location = useLocation();
-	const { xp, level } = useProgressStore();
+	const { xp, level, levelProgress } = useProgressStore();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	// Don't show header inside a lesson
@@ -50,12 +50,30 @@ export const Header = () => {
 
 				{/* Right Side: Stats & Mobile Toggle */}
 				<div className="flex items-center gap-4 z-50 relative">
-					<div className="flex items-center gap-2 px-4 py-2 rounded-full bg-bg-surface-2 border border-bg-surface-3">
-						<Trophy size={16} className="text-warning" />
-						<span className="text-sm font-bold text-text-primary">Lvl {level}</span>
-						<span className="text-xs text-text-secondary border-l border-bg-surface-3 pl-2 ml-1">
-							{xp} XP
-						</span>
+					<div className="relative group">
+						<div className="flex items-center gap-3 px-4 py-2 rounded-full bg-bg-surface-2 border border-bg-surface-3 relative overflow-hidden">
+							{/* Progress Bar Background */}
+							<motion.div className="absolute bottom-0 left-0 h-1 bg-primary/20 w-full" />
+							<motion.div
+								className="absolute bottom-0 left-0 h-1 bg-primary"
+								initial={{ width: 0 }}
+								animate={{ width: `${levelProgress || 0}%` }}
+								transition={{ duration: 1, ease: "easeOut" }}
+							/>
+
+							<div className="flex items-center gap-2 z-10">
+								<Trophy size={18} className="text-warning fill-warning/20" />
+								<span className="text-sm font-bold text-text-primary">Lvl {level}</span>
+								<span className="text-sm text-text-secondary border-l border-bg-surface-3 pl-2 ml-1 font-mono">
+									{xp} XP
+								</span>
+							</div>
+						</div>
+
+						{/* Tooltip for progress */}
+						<div className="absolute top-full right-0 mt-2 px-3 py-1 bg-bg-surface-3 text-xs text-text-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+							Next Level: {Math.round(100 - (levelProgress || 0))}%
+						</div>
 					</div>
 
 					{/* Mobile Menu Toggle */}
