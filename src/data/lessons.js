@@ -293,7 +293,7 @@ https://yandex-security-check.net/verify?id=Y8KL29
 					title: "Как читать ссылки?",
 					content: `Самый важный навык в интернете — уметь находить **Домен**.
 
-![Структура URL](/assets/url-anatomy.png)
+![Структура URL](/assets/url-anatomy.webp)
 
 # Правило: Читай справа налево ⬅️
 Ищи первую косую черту \`/\` и смотри, что стоит перед ней.
@@ -470,7 +470,7 @@ https://yandex-security-check.net/verify?id=Y8KL29
 						title: "Какая сеть безопасная?",
 						description:
 							"Ниже показан вывод сканера сетей. Обе называются `Cafe_WiFi`. Выбери безопасную.",
-						image: "/assets/wifi-networks-screenshot.png",
+						image: "/assets/wifi-networks-screenshot.webp",
 						options: [
 							{
 								id: "network-1",
@@ -717,7 +717,7 @@ https://yandex-security-check.net/verify?id=Y8KL29
 					description:
 						"Алекс выложил 'безобидное' фото из отпуска. Найди 3 детали, которые выдают его личные данные.",
 					data: {
-						image: "/assets/social-detective.png",
+						image: "/assets/social-detective.webp",
 						clues: [
 							{
 								id: "ticket",
@@ -1019,7 +1019,7 @@ https://yandex-security-check.net/verify?id=Y8KL29
 					description:
 						"Перед тобой дипфейк-изображение. Кликай на подозрительные области, чтобы найти признаки подделки.",
 					data: {
-						image: "/assets/deepfake-face-subtle.png",
+						image: "/assets/deepfake-face-subtle.webp",
 						requiredFinds: 3,
 					},
 				},
