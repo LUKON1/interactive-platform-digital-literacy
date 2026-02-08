@@ -130,3 +130,30 @@ body {
 		filter 0.4s ease,
 		backdrop-filter 0.4s ease !important;
 }
+
+@keyframes rainbow-move {
+	to {
+		transform: translateX(-25%);
+	}
+}
+
+.rainbow-box {
+	position: relative;
+	display: inline-flex;
+	overflow: hidden;
+	border-radius: 0.375rem; /* rounded-md */
+	padding: 2px;
+}
+
+.rainbow-box::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 400%;
+	height: 100%;
+	background: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+	background-size: 25% 100%;
+	animation: rainbow-move 0.75s linear infinite;
+	translate: -5% 0%;
+}

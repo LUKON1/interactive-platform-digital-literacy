@@ -236,7 +236,7 @@ export const MediaVerificationQuiz = ({ onComplete, onPrevious, canGoPrevious, i
 										{question.hints.map((hint, index) => (
 											<li
 												key={index}
-												className="flex items-start gap-2 text-sm text-text-secondary">
+												className="flex items-start gap-2 text-sm text-text-secondary text-left">
 												<span className="text-primary">•</span>
 												<span>{hint}</span>
 											</li>

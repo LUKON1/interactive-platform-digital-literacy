@@ -6,7 +6,7 @@ import { useProgressStore } from "../../store/useProgressStore";
 
 export const Header = () => {
 	const location = useLocation();
-	const { xp, level, levelProgress } = useProgressStore();
+	const { xp, level, levelProgress, isMaxLevel } = useProgressStore();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	// Don't show header inside a lesson
@@ -64,15 +64,23 @@ export const Header = () => {
 							<div className="flex items-center gap-2 z-10">
 								<Trophy size={18} className="text-warning fill-warning/20" />
 								<span className="text-sm font-bold text-text-primary">Lvl {level}</span>
-								<span className="text-sm text-text-secondary border-l border-bg-surface-3 pl-2 ml-1 font-mono">
-									{xp} XP
-								</span>
+								{isMaxLevel ? (
+									<span className="text-xs font-bold text-primary border-l border-bg-surface-3 pl-2 ml-1">
+										MAX
+									</span>
+								) : (
+									<span className="text-sm text-text-secondary border-l border-bg-surface-3 pl-2 ml-1 font-mono">
+										{xp} XP
+									</span>
+								)}
 							</div>
 						</div>
 
 						{/* Tooltip for progress */}
 						<div className="absolute top-full right-0 mt-2 px-3 py-1 bg-bg-surface-3 text-xs text-text-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-							Next Level: {Math.round(100 - (levelProgress || 0))}%
+							{isMaxLevel
+								? "Maximum Level Reached!"
+								: `Next Level: ${Math.round(100 - (levelProgress || 0))}%`}
 						</div>
 					</div>
 

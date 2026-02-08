@@ -25,10 +25,13 @@ import { MainLayout } from "./components/layout/MainLayout";
 import { Loader } from "./components/ui/Loader";
 import { XpNotification } from "./components/features/gamification/XpNotification";
 
+import { CompletionModal } from "./components/features/gamification/CompletionModal";
+
 function App() {
 	return (
 		<BrowserRouter>
 			<XpNotification />
+			<CompletionModal />
 			<MainLayout>
 				<Suspense
 					fallback={

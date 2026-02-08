@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { motion } from "motion/react";
 
 export const Footer = () => {
 	const location = useLocation();
@@ -50,6 +51,22 @@ export const Footer = () => {
 						<li>support@cyberacademy.ru</li>
 						<li>+7 (999) 000-00-00</li>
 						<li>Москва, Россия</li>
+						<li>
+							<div className="rainbow-box group">
+								<div className="relative block rounded-sm bg-bg-surface-1 px-3 py-1 text-sm">
+									<p className="flex items-center gap-1 font-medium">
+										<span className="text-text-secondary">Created by</span>
+										<a
+											className="bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold hover:brightness-125 transition-all"
+											href="https://github.com/LUKON1"
+											target="_blank"
+											rel="noopener noreferrer">
+											LUKON
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>

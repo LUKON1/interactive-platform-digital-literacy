@@ -77,27 +77,8 @@ import { useProgressStore } from "../store/useProgressStore";
 import { LESSONS } from "../data/lessons";
 
 const TopicCardConnected = ({ topic, onClick }) => {
-	const completedLessons = useProgressStore((state) => state.completedLessons);
-	const topicLessons = LESSONS[topic.id] || [];
-	const total = topicLessons.length;
-
-	// Calculate progress
-	// We assume completedLessons contains keys like "topicId|lessonId" or just "lessonId" if unique.
-	// Based on previous step, we likely want to verify uniqueness.
-	// BUT, let's use a filter approach that checks if the completed lesson ID is present in the topic's lesson list.
-
-	const completedCount = topicLessons.filter((l) => completedLessons.includes(l.id)).length;
-	// Wait, if IDs are NOT unique (e.g. 'lesson-1' in both topics), this will show progress in both if user completes one.
-	// This confirms we MUST scope the IDs in the store.
-
-	// For now, let's assume we fixed the store to save "topicId|lessonId" OR unique IDs.
-	// If we haven't fixed the store yet, we should.
-	// Let's assume the store saves "topicId|lessonId".
-
-	// Actually, let's fix the store to save combined IDs OR fix lessons.js to have unique IDs.
-	// Unique IDs in lessons.js is cleaner. I will do that in the next step.
-
-	const progress = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+	const getTopicProgress = useProgressStore((state) => state.getTopicProgress);
+	const progress = getTopicProgress(topic.id);
 
 	return <TopicCard topic={topic} progress={progress} onClick={onClick} />;
 };

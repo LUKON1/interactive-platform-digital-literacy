@@ -67,7 +67,8 @@ export const LessonPage = () => {
 	};
 
 	const handleComplete = () => {
-		completeLesson(topicId, lessonId);
+		console.log("handleComplete called for:", lessonId);
+		completeLesson(lessonId);
 	};
 
 	const handleInteractiveComplete = () => {

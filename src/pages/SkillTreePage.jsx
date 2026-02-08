@@ -9,7 +9,7 @@ import { SkillNode } from "../components/features/SkillNode";
 
 export const SkillTreePage = () => {
 	const navigate = useNavigate();
-	const { xp, level, completedLessons } = useProgressStore();
+	const { xp, getTopicProgress, isTopicStarted } = useProgressStore();
 
 	const tiers = useMemo(() => {
 		return {
@@ -20,18 +20,6 @@ export const SkillTreePage = () => {
 	}, []);
 
 	const tierOrder = ["easy", "medium", "hard"];
-
-	// Helper to check if a topic has any completed lessons
-	const isTopicStarted = (topicId) => {
-		const topicLessonData = LESSONS[topicId] || [];
-		return topicLessonData.some((lesson) => completedLessons.includes(lesson.id));
-	};
-
-	// Helper to check completed count
-	const getTopicProgressCount = (topicId) => {
-		const topicLessonData = LESSONS[topicId] || [];
-		return topicLessonData.filter((lesson) => completedLessons.includes(lesson.id)).length;
-	};
 
 	// Animation variants
 	const containerVariants = {
@@ -111,11 +99,9 @@ export const SkillTreePage = () => {
 								{/* Topics Row */}
 								<div className="flex flex-wrap justify-center gap-8 md:gap-16">
 									{tierTopics.map((topic) => {
-										const topicLessonData = LESSONS[topic.id] || [];
-										const completedCount = getTopicProgressCount(topic.id);
-										const total =
-											topicLessonData.length > 0 ? topicLessonData.length : topic.totalLessons || 1;
-										const isCompleted = completedCount >= total && total > 0;
+										const progress = getTopicProgress(topic.id);
+										const isStarted = isTopicStarted(topic.id);
+										const isCompleted = progress === 100;
 
 										let status = "locked";
 										if (isTierUnlocked) status = "active";
@@ -126,7 +112,7 @@ export const SkillTreePage = () => {
 												key={topic.id}
 												topic={topic}
 												status={status}
-												progress={`${completedCount}/${total}`}
+												progress={`${progress}%`}
 												onClick={() => navigate(`/topic/${topic.id}`)}
 												position=""
 											/>
