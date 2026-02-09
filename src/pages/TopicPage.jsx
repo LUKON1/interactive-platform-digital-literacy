@@ -28,10 +28,7 @@ export const TopicPage = () => {
 				animate={{ opacity: 1, y: 0 }}
 				className="motion-safe">
 				<div className="flex items-center gap-4 mb-6">
-					<div className="p-4 rounded-3xl bg-bg-surface-2 text-primary inline-block">
-						{/* Dynamic Icon render could be improved here, currently just text/placeholder if strictly needed */}
-						<span className="font-bold text-2xl">#</span>
-					</div>
+					<div className="p-4 rounded-3xl bg-bg-surface-2 text-primary inline-block"></div>
 					<div>
 						<h1 className="text-4xl font-bold text-text-primary">{themeTopic.title}</h1>
 						<p className="text-text-secondary mt-1">{themeTopic.description}</p>
@@ -41,12 +38,6 @@ export const TopicPage = () => {
 				<div className="grid gap-4 mt-10">
 					{lessons.map((lesson, index) => {
 						const isCompleted = completedLessons.includes(lesson.id);
-						const isLocked =
-							index > 0 &&
-							!completedLessons.includes(lessons[index - 1].id) &&
-							!lessons[index - 1].id.includes("intro"); // Simple lock logic
-						// For demo purposes, let's unlock everything or just first.
-						// Better logic: unlocked if previous completed OR it's the first one.
 						const actuallyLocked = index > 0 && !completedLessons.includes(lessons[index - 1].id);
 
 						return (

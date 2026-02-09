@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  frontend:
+    build: .
+    container_name: frontend-prod
+    ports:
+      - "8080:80"
+    # Для продакшена volumes обычно не нужны, так как код "запечен" в образ.
+    # Если нужно прокинуть конфиги, можно использовать volumes.

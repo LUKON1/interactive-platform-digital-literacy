@@ -79,19 +79,13 @@ export const useProgressStore = create(
 
 			completeLesson: (lessonId) =>
 				set((state) => {
-					console.log("Attempting to complete lesson:", lessonId);
-					console.log("Current completed lessons:", state.completedLessons);
-
 					if (state.completedLessons.includes(lessonId)) {
-						console.log("Lesson already completed. Skipping XP update.");
 						return state;
 					}
 
 					const newCompleted = [...state.completedLessons, lessonId];
 					const amount = 50; // XP per lesson
 					const newState = calculateLevelState(state.xp + amount);
-
-					console.log("New XP State:", newState);
 
 					return {
 						completedLessons: newCompleted,

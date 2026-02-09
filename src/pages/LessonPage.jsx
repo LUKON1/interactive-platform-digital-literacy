@@ -67,12 +67,10 @@ export const LessonPage = () => {
 	};
 
 	const handleComplete = () => {
-		console.log("handleComplete called for:", lessonId);
 		completeLesson(lessonId);
 	};
 
 	const handleInteractiveComplete = () => {
-		// Mark current interactive as completed
 		setCompletedInteractives((prev) => new Set([...prev, currentSlideIndex]));
 		handleNext();
 	};
