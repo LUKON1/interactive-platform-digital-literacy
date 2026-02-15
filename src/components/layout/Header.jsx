@@ -6,7 +6,7 @@ import { useProgressStore } from "../../store/useProgressStore";
 
 export const Header = () => {
 	const location = useLocation();
-	const { xp, level, levelProgress, isMaxLevel } = useProgressStore();
+	const { xp, level, levelProgress, isMaxLevel, setProfileOpen } = useProgressStore();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	// Don't show header inside a lesson
@@ -38,7 +38,7 @@ export const Header = () => {
 						<Link
 							key={link.path}
 							to={link.path}
-							className={`text-lg font-medium transition-colors ${
+							className={`text-md font-medium transition-colors ${
 								location.pathname === link.path
 									? "text-primary"
 									: "text-text-primary hover:text-primary"
@@ -50,8 +50,10 @@ export const Header = () => {
 
 				{/* Right Side: Stats & Mobile Toggle */}
 				<div className="flex items-center gap-4 z-50 relative">
-					<div className="relative group">
-						<div className="flex items-center gap-3 px-4 py-2 rounded-full bg-bg-surface-2 border border-bg-surface-3 relative overflow-hidden">
+					<button
+						onClick={() => setProfileOpen(true)}
+						className="relative group cursor-pointer focus:outline-none">
+						<div className="flex items-center gap-3 px-4 py-2 rounded-full bg-bg-surface-2 border border-bg-surface-3 relative overflow-hidden transition-transform active:scale-95 hover:border-primary/30">
 							{/* Progress Bar Background */}
 							<motion.div className="absolute bottom-0 left-0 h-1 bg-primary/20 w-full" />
 							<motion.div
@@ -77,12 +79,10 @@ export const Header = () => {
 						</div>
 
 						{/* Tooltip for progress */}
-						<div className="absolute top-full right-0 mt-2 px-3 py-1 bg-bg-surface-3 text-xs text-text-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-							{isMaxLevel
-								? "Maximum Level Reached!"
-								: `Next Level: ${Math.round(100 - (levelProgress || 0))}%`}
+						<div className="absolute top-full right-0 mt-2 px-3 py-1 bg-bg-surface-3 text-xs text-text-secondary rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-bg-surface-3">
+							Нажмите для прогресса
 						</div>
-					</div>
+					</button>
 
 					{/* Mobile Menu Toggle */}
 					<button
@@ -126,6 +126,19 @@ export const Header = () => {
 									</Link>
 								</motion.div>
 							))}
+							{/* Mobile Profile Link */}
+							<motion.div
+								initial={{ x: -20, opacity: 0 }}
+								animate={{ x: 0, opacity: 1 }}
+								transition={{ delay: navLinks.length * 0.1 }}
+								onClick={() => {
+									setIsMobileMenuOpen(false);
+									setProfileOpen(true);
+								}}>
+								<button className="text-lg font-medium block py-2 text-text-primary hover:text-primary w-full text-left">
+									Прогресс и Настройки
+								</button>
+							</motion.div>
 						</nav>
 					</motion.div>
 				)}

@@ -259,8 +259,6 @@ export const EmailInspector = ({ onComplete, onPrevious, canGoPrevious, isComple
 				)}
 			</AnimatePresence>
 
-			{/* Custom styles for highlights */}
-			{/* Custom styles for highlights */}
 			<style>{`
 				.urgency-highlight {
 					background-color: transparent;

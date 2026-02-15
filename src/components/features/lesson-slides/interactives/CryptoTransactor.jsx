@@ -52,7 +52,7 @@ export const CryptoTransactor = ({ data, onComplete, onPrevious, canGoPrevious }
 			setStep("fixed");
 		} else {
 			// Reported a valid address? (Unlikely flow here, but safe to handle)
-			setStep("fail"); // Or just show "It was actually correct"
+			setStep("fail");
 		}
 	};
 

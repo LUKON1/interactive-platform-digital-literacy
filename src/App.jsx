@@ -26,12 +26,14 @@ import { Loader } from "./components/ui/Loader";
 import { XpNotification } from "./components/features/gamification/XpNotification";
 
 import { CompletionModal } from "./components/features/gamification/CompletionModal";
+import { ProfileModal } from "./components/features/gamification/ProfileModal";
 
 function App() {
 	return (
 		<BrowserRouter>
 			<XpNotification />
 			<CompletionModal />
+			<ProfileModal />
 			<MainLayout>
 				<Suspense
 					fallback={

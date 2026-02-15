@@ -58,12 +58,14 @@ export const useProgressStore = create(
 
 			// Modal State
 			hasSeenCompletionModal: false,
+			isProfileOpen: false,
 
 			// Transient state (excluded from persist)
 			recentXpGain: 0,
 			lastXpUpdate: 0,
 
 			// Actions
+			setProfileOpen: (isOpen) => set({ isProfileOpen: isOpen }),
 			markCompletionModalSeen: () => set({ hasSeenCompletionModal: true }),
 
 			addXp: (amount) =>

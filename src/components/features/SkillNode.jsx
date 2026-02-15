@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Lock, Star, Check } from "lucide-react";
 import * as Icons from "lucide-react";
 
-export const SkillNode = ({ topic, status, onClick, position, progress }) => {
+export const SkillNode = ({ topic, status, onClick, position, progress, isNext }) => {
 	// status: 'locked' | 'active' | 'completed'
 	const isLocked = status === "locked";
 	const isActive = status === "active";
@@ -21,11 +21,21 @@ export const SkillNode = ({ topic, status, onClick, position, progress }) => {
 		bgClass = "bg-primary";
 		borderClass = "border-bg-base";
 		iconColor = "text-on-primary";
-		shadowClass = "shadow-[0_0_20px_rgba(208,188,255,0.5)] animate-pulse-slow";
+		// Only pulse if it's the NEXT lesson to take
+		if (position && position.includes("isNext")) {
+			// fallback if passed via position
+		}
 	} else if (isCompleted) {
 		bgClass = "bg-success";
 		borderClass = "border-success";
 		iconColor = "text-bg-base";
+	}
+
+	// Check specific prop
+	// Check specific prop
+	if (isNext) {
+		shadowClass =
+			"shadow-[0_0_30px_rgba(208,188,255,0.6)] animate-pulse-slow ring-4 ring-primary/30";
 	}
 
 	return (

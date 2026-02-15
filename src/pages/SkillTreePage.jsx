@@ -35,6 +35,31 @@ export const SkillTreePage = () => {
 		visible: { opacity: 1, y: 0 },
 	};
 
+	// Find the next specific lesson to guide the user
+	const nextUnlockId = useMemo(() => {
+		for (const tierKey of tierOrder) {
+			const tierTopics = tiers[tierKey];
+			if (tierTopics.length === 0) continue;
+
+			// Check if tier is unlocked
+			let isTierUnlocked = tierKey === "easy";
+			if (tierKey !== "easy") {
+				const prevTierKey = tierOrder[tierOrder.indexOf(tierKey) - 1];
+				const prevTierTopics = tiers[prevTierKey];
+				if (prevTierTopics.some((t) => isTopicStarted(t.id))) {
+					isTierUnlocked = true;
+				}
+			}
+
+			if (!isTierUnlocked) return null;
+
+			// Find first topic in this tier that is NOT completed
+			const nextTopic = tierTopics.find((t) => getTopicProgress(t.id) < 100);
+			if (nextTopic) return nextTopic.id;
+		}
+		return null;
+	}, [tiers, tierOrder, isTopicStarted, getTopicProgress]);
+
 	return (
 		<div className="min-h-screen pb-20 overflow-x-hidden">
 			{/* Hero Section */}
@@ -102,6 +127,7 @@ export const SkillTreePage = () => {
 										const progress = getTopicProgress(topic.id);
 										const isStarted = isTopicStarted(topic.id);
 										const isCompleted = progress === 100;
+										const isNext = topic.id === nextUnlockId;
 
 										let status = "locked";
 										if (isTierUnlocked) status = "active";
@@ -115,6 +141,7 @@ export const SkillTreePage = () => {
 												progress={`${progress}%`}
 												onClick={() => navigate(`/topic/${topic.id}`)}
 												position=""
+												isNext={isNext}
 											/>
 										);
 									})}
